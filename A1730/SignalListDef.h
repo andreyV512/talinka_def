@@ -32,7 +32,7 @@ public:
 	CSignal* iSOP; // Татарстан: Режим СОП
 
 	// Card0_OUT_Digital]
-	CSignal* oLPCHPOW; // 0=Прод Пит ПЧ
+   //	CSignal* oLPCHPOW; // 0=Прод Пит ПЧ
 	CSignal* oLSCANPOW; // 1=Прод Пит СУ
 	CSignal* oLSOLPOW; // 2=Соленоид Прод
 	CSignal* oCSOLPOW; // 3=Соленоид Попер

@@ -176,7 +176,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	sms = new SMS(this, Handle, sms_msg);
 	sms->StartServer();
 
-	SLD->oLPCHPOW->Set(true);
+ //	SLD->oLPCHPOW->Set(true);
 	Sleep(1000);
 	if (!frConverter->stateRead())
 	{
@@ -212,7 +212,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 
 	SLD->oLSOLPOW->Set(false);
 	SLD->oCSOLPOW->Set(false);
-	SLD->oLPCHPOW->Set(false);
+  //	SLD->oLPCHPOW->Set(false);
 
 	// запись дефолтного всего
 	ini->WriteString("Default", "TypeSize", cbTypeSize->Text);

@@ -125,7 +125,7 @@ void ThreadOnLine::Post(WPARAM _w, LPARAM _l)
 // -----подготовка к работе от самого начала до движения трубы----------------
 UnicodeString ThreadOnLine::PrepareForWork()
 {
-	SLD->oLPCHPOW->Set(true);
+   //	SLD->oLPCHPOW->Set(true);
 	// ждем цех цикл
 	SetStext2("Ждем сигнала \"Попер Цикл\"");
 	Post(UPDATE_STATUS);
@@ -444,8 +444,8 @@ bool ThreadOnLine::OnlineCycle()
 			if (GetTickCount() - FinishTick > 2000)
 			{
 				Finally();
-				if (SLD->iLPCHRUN->Get())
-					SLD->oLPCHPOW->Set(false);
+		   //		if (SLD->iLPCHRUN->Get())
+			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
 				pr("Задержка по выходу завершена");
 			}
@@ -491,7 +491,7 @@ void ThreadOnLine::Finally()
 void ThreadOnLine::ErrFinally(AnsiString _msg, bool* _Collect, bool* _result)
 {
 	frConverter->stopRotation();
-	SLD->oLPCHPOW->Set(false);
+ //	SLD->oLPCHPOW->Set(false);
 	Finally();
 	*_Collect = false;
 	*_result = false;

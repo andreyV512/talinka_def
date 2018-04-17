@@ -45,7 +45,7 @@ void __fastcall TManageForm::FormShow(TObject *Sender)
 	this->StatusBarBottom->Panels->Items[0]->Text="";
 	this->StatusBarBottom->Refresh();
 	Timer->Enabled=true;
-	SLD->oLPCHPOW->Set(true);
+  //	SLD->oLPCHPOW->Set(true);
 }
 // ---------------------------------------------------------------------------
 void __fastcall TManageForm::FormClose(TObject *Sender,TCloseAction &Action)
