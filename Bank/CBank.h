@@ -1,0 +1,28 @@
+// ---------------------------------------------------------------------------
+#ifndef CBankH
+#define CBankH
+#include <SyncObjs.hpp>
+#include <vector>
+using namespace std;
+
+// ---------------------------------------------------------------------------
+class CBank
+{
+private:
+	TCriticalSection* cs;
+	//зона.датчик.измерение
+	vector<vector<vector<double> > >Source;
+	unsigned int zones;
+	unsigned int sensors;
+	unsigned int last;
+
+public:
+	CBank(int _max_zones, int _sensors);
+	~CBank(void);
+	void Clear(void);
+	// датчик.измерение
+	void AddZone(vector<vector<double> >* new_data);
+	//зона.датчик.измерение
+	int GetNextZone(vector<vector<vector<double> > > * _source);
+};
+#endif
