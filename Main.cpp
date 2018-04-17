@@ -32,6 +32,8 @@
 #include "Password.h"
 #include "Save.h"
 #include "TSChangeWarning.h"
+
+#include "tools_debug/DebugMess.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 
