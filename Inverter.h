@@ -7,7 +7,7 @@
 #include "vcl.h"
 
 //------------------------------------------------------------------------------
-class rotationThread;
+//class rotationThread;
 class Inverter
 {
 	public:
@@ -28,13 +28,14 @@ class Inverter
 		bool ResetErrors();
 		bool NETManage();
 	private:
-		CInv* inverter;
-		TCriticalSection* cs;
+	  //	CInv* inverter;
+	 //	TCriticalSection* cs;
 		//! Поток который будет запрашивать состояние частоника каждые 500мс
-		rotationThread *testThread;
+	//	rotationThread *testThread;
 		void OnProtocol(AnsiString _msg);
 };
 //------------------------------------------------------------------------------
+/*
 class rotationThread: public TThread
 {
 	private:
@@ -44,6 +45,7 @@ class rotationThread: public TThread
 	public:
 		__fastcall rotationThread(CInv* _inv,TCriticalSection* _cs);
 };
+*/
 extern Inverter *frConverter;
 //------------------------------------------------------------------------------
 

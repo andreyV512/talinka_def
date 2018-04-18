@@ -5,6 +5,7 @@
 #include "Inverter.h"
 #include <IniFiles.hpp>
 #include "Global.h"
+#include "SignalListDef.h"
 
 // ------------------------------------------------------------------------------
 
@@ -13,6 +14,7 @@ Inverter *frConverter;
 
 Inverter::Inverter()
 {
+/*
 	TIniFile *ini = new TIniFile(Globals::IniFileName);
 	AnsiString ini_section = "Inverter";
 	if (!ini->ValueExists(ini_section, "Abonent"))
@@ -27,18 +29,22 @@ Inverter::Inverter()
 	delete ini;
 	testThread = NULL;
 	cs = new TCriticalSection();
+	*/
 }
 
 Inverter::~Inverter()
 {
+/*
 	if (testThread != NULL)
 		delete testThread;
 	delete inverter;
 	delete cs;
+	*/
 }
 
 bool Inverter::setParameterSpeed(int number, int value)
 {
+/*
 	if ((number < 4) || (number > 6))
 		return false;
 	bool ret;
@@ -47,22 +53,36 @@ bool Inverter::setParameterSpeed(int number, int value)
 		ret = inverter->SetFrequency(IntToStr(80 + number), value * 100);
 	} cs->Leave();
 	return (ret);
+	*/
+	if((unsigned)value > 7) value = 7;
+	SLD->oRL->Set(0 != (value & 1));
+	SLD->oRM->Set(0 != (value & 2));
+	SLD->oRH->Set(0 != (value & 4));
+	return true;
 }
 
 // ------------------------------------------------------------------------------
 int Inverter::getParameterSpeed(int number)
 {
+/*
 	int ret;
 	cs->Enter();
 	{
 		ret = (int)inverter->GetFrequency("0" + IntToStr(number)) / 100;
 	} cs->Leave();
 	return (ret);
+	*/
+	unsigned t = (SLD->oRL->Get() ? 1: 0)
+			   | (SLD->oRM->Get() ? 2: 0)
+			   | (SLD->oRH->Get() ? 4: 0)
+	;
+	return t;
 }
 
 // ------------------------------------------------------------------------------
 bool Inverter::startRotation()
 {
+/*
 	if (testThread != NULL)
 		return (true);
 	inverter->Reset9966();
@@ -75,11 +95,15 @@ bool Inverter::startRotation()
 		return false;
 	testThread = new rotationThread(inverter, cs);
 	return true;
+	*/
+	SLD->oSTF->Set(true);
+	return true;
 }
 
 // ------------------------------------------------------------------------------
 bool Inverter::stopRotation()
 {
+/*
 	if (testThread == NULL)
 		return (true);
 	delete testThread;
@@ -89,39 +113,51 @@ bool Inverter::stopRotation()
 	if (!inverter->StateWrite())
 		return false;
 	return true;
+	*/
+	SLD->oSTF->Set(false);
+	return true;
 }
 
 // ------------------------------------------------------------------------------
 bool Inverter::stateRead()
 {
+/*
 	bool ret;
 	cs->Enter();
 	{
 		ret = inverter->StateRead();
 	} cs->Leave();
 	return (ret);
+	*/
+	return true;
 }
 
 // ------------------------------------------------------------------------------
 bool Inverter::NETManage()
 {
+/*
 	bool ret;
 	cs->Enter();
 	{
 		ret = inverter->SetMode(0);
 	} cs->Leave();
 	return (ret);
+	*/
+	return true;
 }
 
 // ------------------------------------------------------------------------------
 bool Inverter::ResetErrors()
 {
+/*
 	bool ret;
 	cs->Enter();
 	{
 		ret = inverter->Reset9966();
 	} cs->Leave();
 	return (ret);
+	*/
+	return true;
 }
 
 void Inverter::OnProtocol(AnsiString _msg)
@@ -130,6 +166,7 @@ void Inverter::OnProtocol(AnsiString _msg)
 }
 
 // ******************************************************************************
+/*
 __fastcall rotationThread::rotationThread(CInv* _inv, TCriticalSection* _cs)
 {
 	inv = _inv;
@@ -149,3 +186,4 @@ void __fastcall rotationThread::Execute()
 		Sleep(500);
 	}
 }
+*/
