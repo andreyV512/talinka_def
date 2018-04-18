@@ -54,7 +54,7 @@ void __fastcall TManageForm::FormClose(TObject *Sender,TCloseAction &Action)
 	Timer->Enabled=false;
 	// сбрасываем сигналы, если пользователь забыл об этом
 	SLD->oCSOLPOW->Set(false);
-	SLD->oLSOLPOW->Set(false);
+   //	SLD->oLSOLPOW->Set(false);
 	bLinearSolenoid->Caption="¬ключить магнитное поле";
 	bCrossSolenoid->Caption="¬ключить магнитное поле";
 }
@@ -67,6 +67,7 @@ void __fastcall TManageForm::FormKeyPress(TObject *Sender,wchar_t &Key)
 // ---------------------------------------------------------------------------
 void __fastcall TManageForm::bLinearSolenoidClick(TObject *Sender)
 {
+/*
 	if(!SLD->oLSOLPOW->Get())
 	{
 		SLD->oLSOLPOW->Set(true);
@@ -78,6 +79,7 @@ void __fastcall TManageForm::bLinearSolenoidClick(TObject *Sender)
 		bLinearSolenoid->Caption="¬ключить магнитное поле";
 	}
 	StatusBarBottom->Panels->Items[0]->Text="";
+	*/
 }
 // ---------------------------------------------------------------------------
 
@@ -144,6 +146,7 @@ void __fastcall TManageForm::TimerTimer(TObject *Sender)
 		StatusBarBottom->Panels->Items[0]->Text="—оленоиды поперечного перегреты";
 		StatusBarBottom->Refresh();
 	}
+	/*
 	if(SLD->oLSOLPOW->Get() && !LinearSolenoid->OkResist())
 	{
 		SLD->oLSOLPOW->Set(false);
@@ -164,6 +167,7 @@ void __fastcall TManageForm::TimerTimer(TObject *Sender)
 		eLinearVoltage->Text=" ";
 		eLinearTemperature->Text=" ";
 	}
+	*/
 	if(SLD->oCSOLPOW->Get())
 	{
 		eCrossAmperage->Text=FloatToStrF(CrossSolenoid->getAmperage(),ffNumber,8,1);

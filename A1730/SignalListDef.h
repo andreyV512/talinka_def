@@ -34,7 +34,7 @@ public:
 	// Card0_OUT_Digital]
    //	CSignal* oLPCHPOW; // 0=Прод Пит ПЧ
 	CSignal* oLSCANPOW; // 1=Прод Пит СУ
-	CSignal* oLSOLPOW; // 2=Соленоид Прод
+   //	CSignal* oLSOLPOW; // 2=Соленоид Прод
 	CSignal* oCSOLPOW; // 3=Соленоид Попер
 	CSignal* oCWORK; // 7=Попер Работа
 	CSignal* oLWORK; // 8=Прод Работа

@@ -19,7 +19,7 @@ SignalListDef::SignalListDef(TIniFile* _ini) : SignalList(_ini)
 
   //	oLPCHPOW = Find("ПИТАНИЕ ПЧ МОД.3", false);
 	oLSCANPOW = Find("ПИТАНИЕ СУ МОД.3", false);
-	oLSOLPOW = Find("НАМАГНИЧИВАНИЕ 3", false);
+	//oLSOLPOW = Find("НАМАГНИЧИВАНИЕ 3", false);
 	oCSOLPOW = Find("НАМАГНИЧИВАНИЕ 2", false);
 	oCWORK = Find("РАБОТА 2", false);
 	oLWORK = Find("РАБОТА 3", false);

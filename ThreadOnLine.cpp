@@ -161,11 +161,13 @@ UnicodeString ThreadOnLine::PrepareForWork()
 	SLD->oCRESULT->Set(false);
 
 	SLD->oCSOLPOW->Set(true);
+	/*
 	if (Linear)
 	{
 		Sleep(600);
 		SLD->oLSOLPOW->Set(true);
 	}
+	*/
 	Sleep(500);
 
 	AnsiString a = "Соленоид поперечный: ";
@@ -181,6 +183,7 @@ UnicodeString ThreadOnLine::PrepareForWork()
 		SLD->oCSOLPOW->Set(false);
 		return "Сопротивление поперечного соленоида превысило норму";
 	}
+	/*
 	if (Linear)
 	{
 		a = "Соленоид продольный: ";
@@ -197,6 +200,7 @@ UnicodeString ThreadOnLine::PrepareForWork()
 			return "Сопротивление продольного соленоида превысило норму";
 		}
 	}
+	*/
 	// крутим продольный
 	if (Linear)
 	{
@@ -414,8 +418,8 @@ bool ThreadOnLine::OnlineCycle()
 					TPr::pr(stext2);
 					Post(UPDATE_STATUS);
 				}
-				SLD->oLSOLPOW->Set(false);
-				pr("Сняли oLSOLPOW");
+			 //	SLD->oLSOLPOW->Set(false);
+			//	pr("Сняли oLSOLPOW");
 				SLD->oCSOLPOW->Set(false);
 				pr("Сняли oCSOLPOW");
 				SLD->oLSCANPOW->Set(false);
@@ -430,7 +434,7 @@ bool ThreadOnLine::OnlineCycle()
 			SetStext2("Труба вышла из установки");
 			Post(UPDATE_STATUS);
 			SLD->oCSOLPOW->Set(false);
-			SLD->oLSOLPOW->Set(false);
+		  //	SLD->oLSOLPOW->Set(false);
 			SLD->oLSCANPOW->Set(false);
 			ToFinish = true;
 			FinishTick = GetTickCount();
@@ -482,7 +486,7 @@ void ThreadOnLine::Finally()
 	SLD->oLMEAS->Set(false);
 	SLD->oCWORK->Set(false);
 	SLD->oCMEAS->Set(false);
-	SLD->oLSOLPOW->Set(false);
+  //	SLD->oLSOLPOW->Set(false);
 	SLD->oCSOLPOW->Set(false);
 	SLD->oLSCANPOW->Set(false);
 	SLD->oSHIFT->Set(false);

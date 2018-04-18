@@ -210,7 +210,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 {
 	DragAcceptFiles(Handle, false); // Запрещаем перетаскивание файлов
 
-	SLD->oLSOLPOW->Set(false);
+   //	SLD->oLSOLPOW->Set(false);
 	SLD->oCSOLPOW->Set(false);
   //	SLD->oLPCHPOW->Set(false);
 
@@ -386,7 +386,7 @@ void __fastcall TMainForm::bTestClick(TObject *Sender)
 	SLD->oLSCANPOW->Set(true);
 	SLD->oCSOLPOW->Set(true);
 	Sleep(1000);
-	SLD->oLSOLPOW->Set(true);
+   //	SLD->oLSOLPOW->Set(true);
 
 	ClearCharts();
 	isView = false;
@@ -404,7 +404,7 @@ void __fastcall TMainForm::bTestClick(TObject *Sender)
 	}
 	bool ret = lcard->Read();
 	SLD->oCSOLPOW->Set(false);
-	SLD->oLSOLPOW->Set(false);
+   //	SLD->oLSOLPOW->Set(false);
 	SLD->oLSCANPOW->Set(false);
 	lcard->StopCross();
 	lcard->StopLine();
