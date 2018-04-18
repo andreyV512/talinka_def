@@ -4,8 +4,8 @@ object ManageForm: TManageForm
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#1084#1080
-  ClientHeight = 363
-  ClientWidth = 676
+  ClientHeight = 193
+  ClientWidth = 445
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -26,6 +26,7 @@ object ManageForm: TManageForm
     Height = 120
     Caption = #1052#1086#1076#1091#1083#1100' '#1087#1088#1086#1076#1086#1083#1100#1085#1086#1081' '#1076#1077#1092#1077#1082#1090#1086#1089#1082#1086#1087#1080#1080
     TabOrder = 0
+    Visible = False
     object Label1: TLabel
       Left = 287
       Top = 35
@@ -134,8 +135,8 @@ object ManageForm: TManageForm
     end
   end
   object gbCross: TGroupBox
-    Left = 24
-    Top = 174
+    Left = 20
+    Top = 20
     Width = 401
     Height = 120
     Caption = #1052#1086#1076#1091#1083#1100' '#1087#1086#1087#1077#1088#1077#1095#1085#1086#1081' '#1076#1077#1092#1077#1082#1090#1086#1089#1082#1086#1087#1080#1080
@@ -217,8 +218,8 @@ object ManageForm: TManageForm
   object StatusBarBottom: TStatusBar
     AlignWithMargins = True
     Left = 3
-    Top = 329
-    Width = 670
+    Top = 159
+    Width = 439
     Height = 31
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -231,6 +232,8 @@ object ManageForm: TManageForm
       end>
     ParentColor = True
     UseSystemFont = False
+    ExplicitTop = 329
+    ExplicitWidth = 670
   end
   object TemperatureTimer: TTimer
     Enabled = False
