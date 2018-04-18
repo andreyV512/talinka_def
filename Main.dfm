@@ -481,10 +481,15 @@ object MainForm: TMainForm
     TabOrder = 16
     ExplicitLeft = 309
     ExplicitTop = 129
+    inherited lEtalon: TLabel
+      Visible = False
+    end
     inherited cbEtalonView: TCheckBox
+      Visible = False
       OnClick = FRSOP1cbEtalonViewClick
     end
     inherited cbSelectEtalon: TComboBox
+      Visible = False
       OnDropDown = nil
     end
   end
