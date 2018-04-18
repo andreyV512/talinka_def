@@ -45,6 +45,13 @@ public:
 	CSignal* oLSTROBE; // 13=Прод строб
 	CSignal* oCRESULT; // 14=Попер результат
 	CSignal* oLRESULT; // 15=Прод результат
+
+	CSignal *oSTF;       //  стакт продольника
+	CSignal *oRL;        //  код скорости 0
+	CSignal *oRM;        //  код скорости 1
+	CSignal *oRH;        //  код скорости 2
+
+
 };
 extern SignalListDef* SLD;
 #endif

@@ -1,36 +1,41 @@
-#pragma hdrstop
+Ôªø#pragma hdrstop
 #include "SignalListDef.h"
 #pragma package(smart_init)
 SignalListDef* SLD = NULL;
 
 SignalListDef::SignalListDef(TIniFile* _ini) : SignalList(_ini)
 {
-	iCC = Find("÷≈œ» ”œ–¿¬À≈Õ»ﬂ", true);
-	iLPCHA = Find("œÓ‰ œ◊ ¿", true);
-	iLPCHRUN = Find("œÓ‰ œ◊ RUN", true);
-	iCSTROBE = Find("—“–Œ¡ 2", true);
-	iLSTROBE = Find("—“–Œ¡ 3", true);
-	iCCYCLE = Find("÷» À 2", true);
-	iLCYCLE = Find("÷» À 3", true);
-	iREADY = Find("√ÓÚÓ‚ÌÓÒÚ¸", true);
-	iCCONTROL = Find(" ŒÕ“–ŒÀ‹ 2", true);
-	iLCONTROL = Find(" ŒÕ“–ŒÀ‹ 3", true);
-	iSOP = Find("–≈∆»Ã —Œœ", true);
+	iCC = Find("–¶–ï–ü–ò –£–ü–†–ê–í–õ–ï–ù–ò–Ø", true);
+	iLPCHA = Find("–ü—Ä–æ–¥ –ü–ß –ê", true);
+	iLPCHRUN = Find("–ü—Ä–æ–¥ –ü–ß RUN", true);
+	iCSTROBE = Find("–°–¢–†–û–ë 2", true);
+	iLSTROBE = Find("–°–¢–†–û–ë 3", true);
+	iCCYCLE = Find("–¶–ò–ö–õ 2", true);
+	iLCYCLE = Find("–¶–ò–ö–õ 3", true);
+	iREADY = Find("–ì–æ—Ç–æ–≤–Ω–æ—Å—Ç—å", true);
+	iCCONTROL = Find("–ö–û–ù–¢–†–û–õ–¨ 2", true);
+	iLCONTROL = Find("–ö–û–ù–¢–†–û–õ–¨ 3", true);
+	iSOP = Find("–†–ï–ñ–ò–ú –°–û–ü", true);
 
-	oLPCHPOW = Find("œ»“¿Õ»≈ œ◊ ÃŒƒ.3", false);
-	oLSCANPOW = Find("œ»“¿Õ»≈ —” ÃŒƒ.3", false);
-	oLSOLPOW = Find("Õ¿Ã¿√Õ»◊»¬¿Õ»≈ 3", false);
-	oCSOLPOW = Find("Õ¿Ã¿√Õ»◊»¬¿Õ»≈ 2", false);
-	oCWORK = Find("–¿¡Œ“¿ 2", false);
-	oLWORK = Find("–¿¡Œ“¿ 3", false);
-	oCMEAS = Find("»«Ã≈–≈Õ»≈ 2", false);
-	oLMEAS = Find("»«Ã≈–≈Õ»≈ 3", false);
-	oSHIFT = Find("œ≈–≈ À¿ƒ ¿", false);
-	oCSTROBE = Find("—“–Œ¡ «ŒÕ€ 2", false);
-	oLSTROBE = Find("—“–Œ¡ «ŒÕ€ 3", false);
-	oCRESULT = Find("–≈«”À‹“¿“ 2", false);
-	oLRESULT = Find("–≈«”À‹“¿“ 3", false);
-
+  //	oLPCHPOW = Find("–ü–ò–¢–ê–ù–ò–ï –ü–ß –ú–û–î.3", false);
+	oLSCANPOW = Find("–ü–ò–¢–ê–ù–ò–ï –°–£ –ú–û–î.3", false);
+	oLSOLPOW = Find("–ù–ê–ú–ê–ì–ù–ò–ß–ò–í–ê–ù–ò–ï 3", false);
+	oCSOLPOW = Find("–ù–ê–ú–ê–ì–ù–ò–ß–ò–í–ê–ù–ò–ï 2", false);
+	oCWORK = Find("–†–ê–ë–û–¢–ê 2", false);
+	oLWORK = Find("–†–ê–ë–û–¢–ê 3", false);
+	oCMEAS = Find("–ò–ó–ú–ï–†–ï–ù–ò–ï 2", false);
+	oLMEAS = Find("–ò–ó–ú–ï–†–ï–ù–ò–ï 3", false);
+	oSHIFT = Find("–ü–ï–†–ï–ö–õ–ê–î–ö–ê", false);
+	oCSTROBE = Find("–°–¢–†–û–ë –ó–û–ù–´ 2", false);
+	oLSTROBE = Find("–°–¢–†–û–ë –ó–û–ù–´ 3", false);
+	oCRESULT = Find("–†–ï–ó–£–õ–¨–¢–ê–¢ 2", false);
+	oLRESULT = Find("–†–ï–ó–£–õ–¨–¢–ê–¢ 3", false);
+	
+	oSTF = Find("oSTF", false);
+	oRL  = Find("oRL", false);
+	oRM  = Find("oRM", false);
+    oRH  = Find("oRH", false);
+	
 	CrossCycle = false;
 	LinearCycle = false;
 	InvA = false;
@@ -64,14 +69,14 @@ bool SignalListDef::CheckAlarm(void)
 {
 	if (iCC->WasConst0(false, 50))
 	{
-		AlarmList->Add("ÕÂÚ ÒË„Ì‡Î‡ ˆÂÔË ÛÔ‡‚ÎÂÌËˇ");
+		AlarmList->Add("–ù–µ—Ç —Å–∏–≥–Ω–∞–ª–∞ —Ü–µ–ø–∏ —É–ø—Ä–∞–≤–ª–µ–Ω–∏—è");
 		wasAlarm = true;
 	}
 	if (LinearCycle)
 	{
 		if (iLCYCLE->WasConst0(false, 50))
 		{
-			AlarmList->Add("œÓÔ‡Î ÒË„Ì‡Î œÓ‰ÓÎ¸Ì˚È ÷ËÍÎ");
+			AlarmList->Add("–ü—Ä–æ–ø–∞–ª —Å–∏–≥–Ω–∞–ª –ü—Ä–æ–¥–æ–ª—å–Ω—ã–π –¶–∏–∫–ª");
 			wasAlarm = true;
 		}
 	}
@@ -79,7 +84,7 @@ bool SignalListDef::CheckAlarm(void)
 	{
 		if (iCCYCLE->WasConst0(false, 50))
 		{
-			AlarmList->Add("œÓÔ‡Î ÒË„Ì‡Î œÓÔÂÂ˜Ì˚È ˆËÍÎ");
+			AlarmList->Add("–ü—Ä–æ–ø–∞–ª —Å–∏–≥–Ω–∞–ª –ü–æ–ø–µ—Ä–µ—á–Ω—ã–π —Ü–∏–∫–ª");
 			wasAlarm = true;
 		}
 	}
@@ -87,7 +92,7 @@ bool SignalListDef::CheckAlarm(void)
 	{
 		if (iLPCHA->WasConst0(false, 50))
 		{
-			AlarmList->Add("¿‚‡Ëˇ: ÔÓÔ‡Î ÒË„Ì‡Î œÓ‰ œ◊ ¿");
+			AlarmList->Add("–ê–≤–∞—Ä–∏—è: –ø—Ä–æ–ø–∞–ª —Å–∏–≥–Ω–∞–ª –ü—Ä–æ–¥ –ü–ß –ê");
 			wasAlarm = true;
 		}
 	}
