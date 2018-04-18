@@ -654,6 +654,7 @@ object MainForm: TMainForm
                 Action = Action22
                 Caption = #1044#1077#1092#1077#1082#1090#1086#1089#1082#1086#1087#1080#1089#1090#1099
               end>
+            Visible = False
             Caption = #1050#1086#1085#1090#1088#1086#1083#1100' '#1057#1054#1055
           end>
         ActionBar = ActionMainMenuBar1
