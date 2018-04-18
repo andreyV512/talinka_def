@@ -2,6 +2,7 @@
 #pragma hdrstop
 #include "uFunctions.h"
 #include <stdio.h>
+#include <SysUtils.hpp>
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -40,7 +41,7 @@ void FATAL(AnsiString _msg)
 {
 	WideString w=_msg;
 	Application->MessageBoxW(w.c_bstr(), L"Аварийное завершение",MB_ICONERROR | MB_OK);
-	throw;
+	throw Exception(L"Аварийное завершение");
 }
 void Fread(void* _buf, int _size, int _n, FILE* _df)
 {

@@ -24,9 +24,9 @@ __fastcall ThreadOnLine::ThreadOnLine(bool CreateSuspended, bool _Linear,
 	Linear = _Linear;
 	ini = _ini;
 	AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
-	InSpeed = ini->ReadInteger(sect, "InSpeed", 20);
-	WorkSpeed = ini->ReadInteger(sect, "WorkSpeed", 35);
-	OutSpeed = ini->ReadInteger(sect, "OutSpeed", 20);
+	InSpeed = ini->ReadInteger(sect, "InSpeed", 4);
+	WorkSpeed = ini->ReadInteger(sect, "WorkSpeed", 4);
+	OutSpeed = ini->ReadInteger(sect, "OutSpeed", 4);
 	delay = ini->ReadInteger("OtherSettings", "OnLineCycleDelay", 10);
 	pauseWorkSpeed = ini->ReadInteger(sect, "PauseWorkSpeed", 1050);
 	pauseStop = ini->ReadInteger(sect, "PauseStop", 500);
