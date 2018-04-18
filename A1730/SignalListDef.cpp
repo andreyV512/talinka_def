@@ -31,10 +31,10 @@ SignalListDef::SignalListDef(TIniFile* _ini) : SignalList(_ini)
 	oCRESULT = Find("РЕЗУЛЬТАТ 2", false);
 	oLRESULT = Find("РЕЗУЛЬТАТ 3", false);
 	
-	oSTF = Find("oSTF", false);
-	oRL  = Find("oRL", false);
-	oRM  = Find("oRM", false);
-    oRH  = Find("oRH", false);
+	oSTF = Find("STF", false);
+	oRL  = Find("RL", false);
+	oRM  = Find("RM", false);
+    oRH  = Find("RH", false);
 	
 	CrossCycle = false;
 	LinearCycle = false;
