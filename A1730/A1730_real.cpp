@@ -4,6 +4,7 @@
 #include "Protocol.h"
 #include "uFunctions.h"
 #pragma package(smart_init)
+/*
 A1730_real::A1730_real(int _DevNum)
 {
 	startPort = 0;
@@ -59,6 +60,55 @@ void A1730_real::Write(DWORD _v)
 	if (dio->DoWrite(startPort, portCount, buf) != Success)
 		FATAL("A1730::Write: не могу записать на плату");
 }
+void A1730_real::pr(AnsiString _msg)
+{
+	TPr::pr(_msg);
+}
+*/
+A1730_real::A1730_real(int _DevNum)
+{
+	ErrorCode errorCode;
+	instantDiCtrl = AdxInstantDiCtrlCreate();
+	instantDoCtrl = AdxInstantDoCtrlCreate();
+	DeviceInformation devInfo(_DevNum);
+	errorCode = instantDiCtrl->setSelectedDevice(devInfo);
+	if (BioFailed(errorCode))
+		throw(Exception
+		("A1730::A1730: не смогли открыть плату Advantech1730"));
+	errorCode = instantDoCtrl->setSelectedDevice(devInfo);
+	if (BioFailed(errorCode))
+		throw(Exception
+		("A1730::A1730: не смогли открыть плату Advantech1730"));
+}
+
+A1730_real::~A1730_real(void)
+{
+	instantDiCtrl->Dispose();
+	instantDoCtrl->Dispose();
+}
+
+DWORD A1730_real::Read(void)
+{
+	DWORD buf;
+	ErrorCode errorcode  = instantDiCtrl->Read(0,4, (unsigned char *)&buf);
+	if (errorcode != Success) throw(Exception("A1730::ReadIn: не могу прочитать плату"));
+	return buf;
+}
+
+DWORD A1730_real::ReadOut(void)
+{
+	DWORD buf;
+	ErrorCode errorcode  = instantDoCtrl->Read(0, 4, (unsigned char *)&buf);
+	if (errorcode != Success) throw(Exception("A1730::ReadIn: не могу прочитать плату"));
+	return buf;
+}
+
+void A1730_real::Write(DWORD _v)
+{
+	ErrorCode errorcode  = instantDoCtrl->Write(0,4, (unsigned char *)&_v);
+	if (errorcode != Success) throw(Exception("A1730::Write: не могу записать на плату"));
+}
+
 void A1730_real::pr(AnsiString _msg)
 {
 	TPr::pr(_msg);
