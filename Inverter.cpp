@@ -115,6 +115,10 @@ bool Inverter::stopRotation()
 	return true;
 	*/
 	SLD->oSTF->Set(false);
+
+	SLD->oRL->Set(false);
+	SLD->oRM->Set(false);
+	SLD->oRH->Set(false);
 	return true;
 }
 

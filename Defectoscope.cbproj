@@ -502,10 +502,9 @@
 				<DependentOn>View.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
-			<FormResources Include="NewDefectoscoper.dfm"/>
 			<FormResources Include="Password.dfm"/>
 			<FormResources Include="Settings.dfm"/>
-			<FormResources Include="Main.dfm"/>
+			<FormResources Include="NewDefectoscoper.dfm"/>
 			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="uTFRDeads.dfm"/>
 			<FormResources Include="uTFRLine.dfm"/>
@@ -531,15 +530,16 @@
 			<FormResources Include="ABOUT_NTC_NK_URAN.dfm"/>
 			<FormResources Include="A1730\uFRSigPanel.dfm"/>
 			<FormResources Include="A1730\uFSignalsState.dfm"/>
-			<FormResources Include="EtalonTubeDefectsNew.dfm"/>
-			<FormResources Include="EtalonNewDefect.dfm"/>
 			<FormResources Include="EtalonTubeDefects.dfm"/>
+			<FormResources Include="EtalonTubeDefectsNew.dfm"/>
+			<FormResources Include="Main.dfm"/>
+			<FormResources Include="EtalonNewDefect.dfm"/>
+			<FormResources Include="Defectoscopers.dfm"/>
+			<FormResources Include="EtalonDefectNew.dfm"/>
 			<FormResources Include="EtalonDefectsCheck.dfm"/>
 			<FormResources Include="EtalonDefect.dfm"/>
-			<FormResources Include="EtalonDefectNew.dfm"/>
-			<FormResources Include="EtalonCheckJournal.dfm"/>
-			<FormResources Include="Defectoscopers.dfm"/>
 			<FormResources Include="EtalonBorderSet.dfm"/>
+			<FormResources Include="EtalonCheckJournal.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

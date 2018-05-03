@@ -127,11 +127,11 @@ void TSettingsForm::LoadTypeSize(AnsiString _typeSize)
 	pos=ValueListEditor->InsertRow("Диаметр трубы, мм",
 		ini->ReadInteger(sect,"Diameter",0),true);
 	ValueListEditor->ItemProps[pos-1]->EditStyle = esPickList;
-		ValueListEditor->ItemProps[pos-1]->PickList->Add("48");
+	  //	ValueListEditor->ItemProps[pos-1]->PickList->Add("48");
 		ValueListEditor->ItemProps[pos-1]->PickList->Add("60");
 		ValueListEditor->ItemProps[pos-1]->PickList->Add("73");
 		ValueListEditor->ItemProps[pos-1]->PickList->Add("89");
-		ValueListEditor->ItemProps[pos-1]->PickList->Add("114");
+  //		ValueListEditor->ItemProps[pos-1]->PickList->Add("114");
 
 	names->Add("CrossBorder1");
 	ValueListEditor->InsertRow("Поперечный порог брака",
