@@ -110,11 +110,14 @@ void Filters::Settings::Load(FILE* _df)
 
 }
 // ------------------------------------------------------------------------------
+//HINSTANCE Filters::dllInstance = NULL;
 // ------------------------------------------------------------------------------
 Filters::Filters(TIniFile* _ini, AnsiString _type) : settings(_type)
 {
 	ini = _ini;
-	dllInstance = LoadLibrary(L"filters.dll");
+	System::UnicodeString path = ExtractFilePath(Application->ExeName) + "../../Settings/filters.dll";
+   //	if(!dllInstance)
+	dllInstance = LoadLibrary(path.c_str());
 
 	if (!dllInstance)
 	{

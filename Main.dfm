@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = -44
   Top = 0
   Caption = #1041#1059#1056#1040#1053'-5000  '#8470'1627. '#1052#1072#1075#1085#1080#1090#1086#1080#1085#1076#1091#1082#1094#1080#1086#1085#1085#1072#1103' '#1076#1077#1092#1077#1082#1090#1086#1089#1082#1086#1087#1080#1103' '#1053#1050#1058
-  ClientHeight = 802
+  ClientHeight = 801
   ClientWidth = 1276
   Color = clBtnFace
   Constraints.MinHeight = 840
@@ -78,7 +78,7 @@ object MainForm: TMainForm
   object StatusBarBottom: TStatusBar
     AlignWithMargins = True
     Left = 3
-    Top = 768
+    Top = 767
     Width = 1270
     Height = 31
     Panels = <
@@ -438,7 +438,7 @@ object MainForm: TMainForm
     Visible = False
   end
   object ActionMainMenuBar1: TActionMainMenuBar
-    Left = 0
+    Left = 8
     Top = 0
     Width = 1284
     Height = 26
@@ -449,6 +449,7 @@ object MainForm: TMainForm
     Color = clMenuBar
     ColorMap.HighlightColor = clWhite
     ColorMap.UnusedColor = clWhite
+    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -12
@@ -560,7 +561,6 @@ object MainForm: TMainForm
   end
   object XPManifest1: TXPManifest
     Left = 616
-    Top = 8
   end
   object ActionManager1: TActionManager
     ActionBars = <

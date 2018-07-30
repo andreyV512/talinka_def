@@ -88,7 +88,6 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 	CSensors = ini->ReadInteger(sect, "CrossSensors", 12);
 	BankLine = NULL;
 	BankCross = NULL;
-
 	ComWithASU = ini->ReadBool("OtherSettings", "ComWithASU", 0);
 	SLD = new SignalListDef(ini);
 	FSignalsState = new TFSignalsState(this, ini, SLD);
@@ -449,20 +448,20 @@ void __fastcall TMainForm::bWorkClick(TObject *Sender)
 	if (workonline == NULL)
 	{
 		//Вот здесь нужно вызвать окно запроса оператора.
-		TAuthorisationForm* AuthorisationForm = new TAuthorisationForm(this,ini);
-		AuthorisationForm->ShowModal();
-		delete AuthorisationForm;
-		if (ini->ReadBool("Default", "IsAuthorisationOk", false))
-		{
-			AnsiString Defectoscoper = ini->ReadString("Default","LastAuthorisation","");
-			if(Defectoscoper != "")
-			{
-				AnsiString NewCaption = "БУРАН-5000 №1627. Магнитоиндукционная дефектоскопия НКТ. ";
-				NewCaption	+= "Оператор " + Defectoscoper;
-				MainForm->Caption = NewCaption;
-			}
-            Start();
-		}
+   //		TAuthorisationForm* AuthorisationForm = new TAuthorisationForm(this,ini);
+	 //	AuthorisationForm->ShowModal();
+	 //	delete AuthorisationForm;
+	 //	if (ini->ReadBool("Default", "IsAuthorisationOk", false))
+	  //	{
+	   //		AnsiString Defectoscoper = ini->ReadString("Default","LastAuthorisation","");
+		//	if(Defectoscoper != "")
+		 //	{
+		  //		AnsiString NewCaption = "БУРАН-5000 №1627. Магнитоиндукционная дефектоскопия НКТ. ";
+		   //		NewCaption	+= "Оператор " + Defectoscoper;
+			//	MainForm->Caption = NewCaption;
+		   //	}
+			Start();
+	   //	}
 	}
 	else
 		ReStart();
@@ -1009,7 +1008,7 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = state;
 //	ActionManager1->FindItemByCaption("Группа прочности")->Visible = state;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = state;
-	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
+ //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
 
 	// menuTest->Enabled = state;
 	//
@@ -1104,6 +1103,7 @@ void __fastcall TMainForm::bWinWorkOkClick(TObject *Sender)
 	WinWorkPanel->Visible=false;
 }
 //---------------------------------------------------------------------------
+
 
 
 

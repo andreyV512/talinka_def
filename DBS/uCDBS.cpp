@@ -9,7 +9,7 @@
 CDBS::CDBS(void)
 {
 	need_delete = true;
-	Init(ChangeFileExt(Application->ExeName, ".udl"));
+	Init(ExtractFilePath(Application->ExeName) + "../../Settings/ConnectionBase.udl");
 }
 
 // ------------------------------------------------------------------------------

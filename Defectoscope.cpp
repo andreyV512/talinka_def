@@ -6,10 +6,9 @@
 
 
 //---------------------------------------------------------------------------
-USEFORM("NewDefectoscoper.cpp", NewDefectoscoperForm);
 USEFORM("Password.cpp", PasswordForm);
 USEFORM("Settings.cpp", SettingsForm);
-USEFORM("Main.cpp", MainForm);
+USEFORM("NewDefectoscoper.cpp", NewDefectoscoperForm);
 USEFORM("Manage.cpp", ManageForm);
 USEFORM("uTFRDeads.cpp", FRDeads); /* TFrame: File Type */
 USEFORM("uTFRLine.cpp", FRLine); /* TFrame: File Type */
@@ -35,15 +34,16 @@ USEFORM("ColorSettings.cpp", FormColor);
 USEFORM("ABOUT_NTC_NK_URAN.cpp", AboutBox1);
 USEFORM("A1730\uFRSigPanel.cpp", FRSigPanel); /* TFrame: File Type */
 USEFORM("A1730\uFSignalsState.cpp", FSignalsState);
-USEFORM("EtalonTubeDefectsNew.cpp", EtalonTubeDefectsNewForm);
-USEFORM("EtalonNewDefect.cpp", EtalonNewDefectForm);
 USEFORM("EtalonTubeDefects.cpp", EtalonTubeDefectsForm);
+USEFORM("EtalonTubeDefectsNew.cpp", EtalonTubeDefectsNewForm);
+USEFORM("Main.cpp", MainForm);
+USEFORM("EtalonNewDefect.cpp", EtalonNewDefectForm);
+USEFORM("Defectoscopers.cpp", DefectoscopersForm);
+USEFORM("EtalonDefectNew.cpp", EtalonDefectNewForm);
 USEFORM("EtalonDefectsCheck.cpp", EtalonDefectsCheckForm);
 USEFORM("EtalonDefect.cpp", EtalonDefectForm);
-USEFORM("EtalonDefectNew.cpp", EtalonDefectNewForm);
-USEFORM("EtalonCheckJournal.cpp", EtalonCheckJournalForm);
-USEFORM("Defectoscopers.cpp", DefectoscopersForm);
 USEFORM("EtalonBorderSet.cpp", EtalonBorderSet);
+USEFORM("EtalonCheckJournal.cpp", EtalonCheckJournalForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {

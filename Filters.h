@@ -83,6 +83,7 @@ public:
 		void Save(FILE* _df);
 	};
 private:
+   //	static
 	HINSTANCE dllInstance;
 	_ChebyshevI filter_chebyshev;
 	_Elliptic filter_elliptic;
