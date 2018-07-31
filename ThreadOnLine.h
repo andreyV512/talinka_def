@@ -42,6 +42,8 @@ private:
 	UINT thread_msg;
 	HWND main_handle;
 
+	unsigned unitBaseMM; //базовое расстояние между Контроль1 и Контроль2 в мм
+
 	void Post(WPARAM _w,LPARAM _l=0);
 
 	bool Collect;

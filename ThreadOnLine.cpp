@@ -11,6 +11,7 @@
 #include "uFunctions.h"
 #include "LCardData.h"
 #include "Singleton.h"
+#include "DebugMess.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -37,7 +38,7 @@ __fastcall ThreadOnLine::ThreadOnLine(bool CreateSuspended, bool _Linear,
 	cs = new TCriticalSection();
 	calc_event = new TEvent(NULL, false, false, "calc_event", true);
 	SGbuffer = _SGbuffer;
-
+		unitBaseMM = ini->ReadInteger("unitBase", "unitBaseMM", 700);
 }
 
 // ---------------------------------------------------------------------------
@@ -261,9 +262,46 @@ bool ThreadOnLine::OnlineCycle()
 	DWORD ControlOffTime = 0;
 	int CrossStrobes = 0;
 	int LineStrobes = 0;
+	unsigned startTimeControl = 0;
+	unsigned longTimeControl = 0;
+	unsigned crossTimeControl = 0;
+	double speedTube = 0.4;
+	bool SLD_iCSTROBE_Get = false;  // заглушка на отсутствие лир
+	bool SLD_iLSTROBE_Get = false;
+
 	while (Collect)
 	{
 		Sleep(delay);
+
+		// заглушка на отсутствие лир
+		if(!startTimeControl && SLD->iLCONTROL->Get())
+		{
+			longTimeControl = startTimeControl = GetTickCount();
+		}
+		unsigned current = GetTickCount();
+		unsigned t = crossTimeControl - current;
+		if(t > 200)
+		{
+		   crossTimeControl += int((t - crossTimeControl) * speedTube);
+		   SLD_iCSTROBE_Get = true;
+		}
+		else if(t > 100)
+		{
+			SLD_iCSTROBE_Get = false;
+		}
+
+		t = longTimeControl - current;
+		if(t > 200)
+		{
+		   longTimeControl += int((t - longTimeControl) * speedTube);
+		   SLD_iLSTROBE_Get = true;
+		}
+		else if(t > 100)
+		{
+			SLD_iCSTROBE_Get = false;
+		}
+			// заглушка на отсутствие лир конец
+
 		if (Cross && !ppIsStoped)
 		{
 			// -----------------------------------------------------------------------------------------------------------------
@@ -283,9 +321,13 @@ bool ThreadOnLine::OnlineCycle()
 				//ѕровер€ем не —ќѕ ли это
 				Singleton->isSOP = SLD->iSOP->WasConst(true,50);
 				if(Singleton->isSOP) pr("THIS IS SOP!!!"); //todo убрать после отладки
+
+				crossTimeControl = GetTickCount();
+				speedTube = unitBaseMM / (crossTimeControl - startTimeControl);
+				dprint("Speed %f\n", speedTube);
 			}
 			// ќбсчитываем поперечный модуль
-			if (!ppSignaled && ppStarted && SLD->iCSTROBE->Get())
+			if (!ppSignaled && ppStarted && SLD_iCSTROBE_Get)//SLD->iCSTROBE->Get())  // заглушка на отсутствие лир
 			{
 				CrossStrobes++;
 				TPr::pr(AnsiString("ѕоперечных стробов ") + CrossStrobes);
@@ -300,7 +342,7 @@ bool ThreadOnLine::OnlineCycle()
 					Post(REDRAW, REDRAW_CROSS);
 				}
 			}
-			if (ppSignaled && !SLD->iCSTROBE->Get())
+			if (ppSignaled && !SLD_iCSTROBE_Get)//SLD->iCSTROBE->Get())  // заглушка на отсутствие лир
 				ppSignaled = false;
 			if (ppStarted && !SLD->iCCONTROL->Get())
 			{
@@ -340,9 +382,9 @@ bool ThreadOnLine::OnlineCycle()
 				TPr::pr(stext2);
 				Post(UPDATE_STATUS);
 			}
-			if (prStarted && SLD->iLSTROBE->Get())
+			if (prStarted && SLD_iLSTROBE_Get)//SLD->iLSTROBE->Get()) // заглушка на отсутствие лир
 			{
-				if (!prSignaled && prStarted && SLD->iLSTROBE->Get())
+				if (!prSignaled && prStarted)
 				{
 					LineStrobes++;
 					TPr::pr(AnsiString("ѕродольных стробов ") + LineStrobes);
@@ -358,7 +400,7 @@ bool ThreadOnLine::OnlineCycle()
 					}
 				}
 			}
-			if (prSignaled && !SLD->iLSTROBE->Get())
+			if (prSignaled && !SLD_iLSTROBE_Get)//SLD->iLSTROBE->Get())   // заглушка на отсутствие лир
 				prSignaled = false;
 			if (!isTwoSpeed && prStarted && ((CycleTick - FirstLinerStrobeTick)
 				> (DWORD)pauseStop))
