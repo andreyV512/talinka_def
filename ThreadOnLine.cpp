@@ -38,7 +38,8 @@ __fastcall ThreadOnLine::ThreadOnLine(bool CreateSuspended, bool _Linear,
 	cs = new TCriticalSection();
 	calc_event = new TEvent(NULL, false, false, "calc_event", true);
 	SGbuffer = _SGbuffer;
-		unitBaseMM = ini->ReadInteger("unitBase", "unitBaseMM", 700);
+	unitBaseMMCross = ini->ReadInteger("unitBase", "unitBaseMMCross", 1830);
+	unitBaseMMLong = ini->ReadInteger("unitBase", "unitBaseMMLong", 500);
 }
 
 // ---------------------------------------------------------------------------
@@ -262,9 +263,9 @@ bool ThreadOnLine::OnlineCycle()
 	DWORD ControlOffTime = 0;
 	int CrossStrobes = 0;
 	int LineStrobes = 0;
-	unsigned startTimeControl = 0;
-	unsigned longTimeControl = 0;
 	unsigned crossTimeControl = 0;
+	unsigned longTimeControl = 0;
+	unsigned SQ1TimeControl = 0;
 	double speedTube = 0.4;
 	bool SLD_iCSTROBE_Get = false;  // заглушка на отсутствие лир
 	bool SLD_iLSTROBE_Get = false;
@@ -274,31 +275,31 @@ bool ThreadOnLine::OnlineCycle()
 		Sleep(delay);
 
 		// заглушка на отсутствие лир
-		if(!startTimeControl && SLD->iLCONTROL->Get())
+		unsigned tick = GetTickCount();
+		if(!SQ1TimeControl && SLD->iSQ1->Get())
 		{
-			longTimeControl = startTimeControl = GetTickCount();
+			SQ1TimeControl = tick;
 		}
-		unsigned current = GetTickCount();
-		unsigned t = crossTimeControl - current;
-		if(t > 200)
+		double p = speedTube * (int)(crossTimeControl - tick);
+		if(p > 200)
 		{
-		   crossTimeControl += int((t - crossTimeControl) * speedTube);
+		   crossTimeControl += int((p - 200) / speedTube);
 		   SLD_iCSTROBE_Get = true;
 		}
-		else if(t > 100)
+		else if(p > 100)
 		{
 			SLD_iCSTROBE_Get = false;
 		}
 
-		t = longTimeControl - current;
-		if(t > 200)
+		p = speedTube * (int)(longTimeControl - tick);
+		if(p > 200)
 		{
-		   longTimeControl += int((t - longTimeControl) * speedTube);
+		   longTimeControl += int((p - 200) / speedTube);
 		   SLD_iLSTROBE_Get = true;
 		}
-		else if(t > 100)
+		else if(p > 100)
 		{
-			SLD_iCSTROBE_Get = false;
+			SLD_iLSTROBE_Get = false;
 		}
 			// заглушка на отсутствие лир конец
 
@@ -323,8 +324,8 @@ bool ThreadOnLine::OnlineCycle()
 				if(Singleton->isSOP) pr("THIS IS SOP!!!"); //todo убрать после отладки
 
 				crossTimeControl = GetTickCount();
-				speedTube = unitBaseMM / (crossTimeControl - startTimeControl);
-				dprint("Speed %f\n", speedTube);
+				speedTube = (double)unitBaseMMCross / (crossTimeControl - SQ1TimeControl);
+				dprint("cross Speed %f\n", speedTube);
 			}
 			// Обсчитываем поперечный модуль
 			if (!ppSignaled && ppStarted && SLD_iCSTROBE_Get)//SLD->iCSTROBE->Get())  // заглушка на отсутствие лир
@@ -381,6 +382,11 @@ bool ThreadOnLine::OnlineCycle()
 				SetStext2("Начали сбор с продольного");
 				TPr::pr(stext2);
 				Post(UPDATE_STATUS);
+
+				longTimeControl = GetTickCount();
+				speedTube = (double)unitBaseMMLong / (longTimeControl - SQ1TimeControl);
+				dprint("long Speed %f\n", speedTube);
+
 			}
 			if (prStarted && SLD_iLSTROBE_Get)//SLD->iLSTROBE->Get()) // заглушка на отсутствие лир
 			{

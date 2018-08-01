@@ -42,7 +42,8 @@ private:
 	UINT thread_msg;
 	HWND main_handle;
 
-	unsigned unitBaseMM; //базовое расстояние между Контроль1 и Контроль2 в мм
+	unsigned unitBaseMMLong; //базовое расстояние между SQ1 и Контроль1 в мм
+	unsigned unitBaseMMCross; //базовое расстояние между SQ1 и Контроль2 в мм
 
 	void Post(WPARAM _w,LPARAM _l=0);
 
