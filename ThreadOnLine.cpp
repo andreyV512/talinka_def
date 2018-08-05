@@ -280,6 +280,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 			SQ1TimeControl = tick;
 		}
+
 		double p = speedTube * (int)(crossTimeControl - tick);
 		if(p > 200)
 		{
