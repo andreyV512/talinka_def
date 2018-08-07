@@ -15,7 +15,7 @@ SignalListDef::SignalListDef(TIniFile* _ini) : SignalList(_ini)
 	iREADY = Find("Готовность", true);
 	iCCONTROL = Find("КОНТРОЛЬ 2", true);
 	iLCONTROL = Find("КОНТРОЛЬ 1", true);
-	iSOP = Find("РЕЖИМ СОП", true);
+   //	iSOP = Find("РЕЖИМ СОП", true);
 	iSQ1 = Find("SQ21", true);
 
   //	oLPCHPOW = Find("ПИТАНИЕ ПЧ МОД.3", false);

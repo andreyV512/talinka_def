@@ -49,11 +49,11 @@ public:
 	int LSensors;
 	int CSensors;
 	int OSensors;
-
+	static const int others_sensors_count = 3;
 	// ! Конструктор
 	RLCard_parameters()
 	{
-		others.resize(7);
+		others.resize(others_sensors_count);
 	}
 	void LoadSettings(TIniFile* _ini);
 

@@ -126,6 +126,12 @@ void ThreadOnLine::Post(WPARAM _w, LPARAM _l)
 }
 
 // ---------------------------------------------------------------------------
+void __fastcall ThreadOnLine::UpdateStatusBarBottom()
+{
+
+	 MainForm->StatusBarBottom->Panels->Items[2]->Text = updateStatusBarBottomParam;
+	 MainForm->StatusBarBottom->Refresh();
+}
 // -----подготовка к работе от самого начала до движения трубы----------------
 UnicodeString ThreadOnLine::PrepareForWork()
 {
@@ -173,7 +179,31 @@ UnicodeString ThreadOnLine::PrepareForWork()
 	}
 	*/
 	Sleep(500);
-    AnsiString a = "Соленоид поперечный: ";
+
+	double t = 0;
+	if(!CrossSolenoid->Solenoid1U(t))
+	{
+		char *a = "Перегрев поперечного соленоида 1";
+		TPr::pr(a);
+		char buf[128];
+		 sprintf(buf, "%s %.1f", a, t);
+		 updateStatusBarBottomParam = buf;
+		 Synchronize(&UpdateStatusBarBottom);
+		 return a;
+	}
+	if(!CrossSolenoid->Solenoid2U(t))
+	{
+		char *a = "Перегрев поперечного соленоида 2";
+		TPr::pr(a);
+		char buf[128];
+		sprintf(buf, "%s %.1f", a, t);
+		updateStatusBarBottomParam = buf;
+		 Synchronize(&UpdateStatusBarBottom);
+		 return a;
+	}
+	SLD->oCSOLPOW->Set(false);
+	Sleep(500);
+	 AnsiString a = "Соленоид поперечный: ";
 	bool solinoidOn = CrossSolenoid->SolenoidOn();
 	if(solinoidOn)
 	{
@@ -188,30 +218,9 @@ UnicodeString ThreadOnLine::PrepareForWork()
 	{
 		char *a = "Нет поля поперечного соленоида";
 		TPr::pr(a);
-		MainForm->StatusBarBottom->Panels->Items[2]->Text = a;
-		MainForm->StatusBarBottom->Refresh();
+		 updateStatusBarBottomParam = a;
+		 Synchronize(&UpdateStatusBarBottom);
 		return a;
-	}
-	double t = 0;
-	if(!CrossSolenoid->Solenoid1U(t))
-	{
-		char *a = "Перегрев поперечного соленоида 1";
-		TPr::pr(a);
-		char buf[128];
-		sprintf(buf, "%s %.1f", a, t);
-		MainForm->StatusBarBottom->Panels->Items[2]->Text = buf;
-		MainForm->StatusBarBottom->Refresh();
-		 return a;
-	}
-	if(!CrossSolenoid->Solenoid2U(t))
-	{
-		char *a = "Перегрев поперечного соленоида 2";
-		TPr::pr(a);
-		char buf[128];
-		sprintf(buf, "%s %.1f", a, t);
-		MainForm->StatusBarBottom->Panels->Items[2]->Text = buf;
-		MainForm->StatusBarBottom->Refresh();
-		 return a;
 	}
    /*
 	AnsiString a = "Соленоид поперечный: ";
@@ -364,8 +373,8 @@ bool ThreadOnLine::OnlineCycle()
 				TPr::pr(stext2);
 				Post(UPDATE_STATUS);
 				//Проверяем не СОП ли это
-				Singleton->isSOP = SLD->iSOP->WasConst(true,50);
-				if(Singleton->isSOP) pr("THIS IS SOP!!!"); //todo убрать после отладки
+		   //		Singleton->isSOP = SLD->iSOP->WasConst(true,50);
+		   //		if(Singleton->isSOP) pr("THIS IS SOP!!!"); //todo убрать после отладки
 
 				crossTimeControl = GetTickCount();
 				speedTube = (double)unitBaseMMCross / (crossTimeControl - SQ1TimeControl);

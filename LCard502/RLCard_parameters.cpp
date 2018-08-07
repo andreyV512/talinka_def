@@ -13,7 +13,7 @@ void RLCard_parameters::LoadSettings(TIniFile* ini)
 
 	LSensors=ini->ReadInteger(sect,"LineSensors",4);
 	CSensors=ini->ReadInteger(sect,"CrossSensors",12);
-	OSensors=7;
+	OSensors=others_sensors_count;
 	AnsiString name;
 	int ldiameter=ini->ReadInteger(sect,"Diameter",1);
 
@@ -63,19 +63,25 @@ void RLCard_parameters::LoadSettings(TIniFile* ini)
 		channels.push_back(chPar);
 	}
 	others.clear();
-	for(int i=0;i<7;i++)
+	for(int i=0;i<others_sensors_count;i++)
 	{
 		RChannel_parameters ch;
 		ch.range=0;
 		ch.collectedMode=0;
 		others.push_back(ch);
 	}
-	others[0].logicalChannel=ini->ReadInteger("PP","amperageChannel",3);
+	/*
+	channelSolenoidsON = ini->ReadInteger("PP", "spIsSolenoidsON", 27);
+	channelSolinoid1 = ini->ReadInteger("PP", "spSolenoid1", 28);
+	channelSolinoid2 = ini->ReadInteger("PP", "spSolenoid2", 29);
+	*/
+	others[0].logicalChannel=ini->ReadInteger("PP", "spIsSolenoidsON", 27);
 
-	others[1].logicalChannel=ini->ReadInteger("PP","voltageChannel",4);
+	others[1].logicalChannel=ini->ReadInteger("PP", "spSolenoid1", 28);
 
-	others[2].logicalChannel=ini->ReadInteger("PR","amperageChannel",5);
+	others[2].logicalChannel=ini->ReadInteger("PP", "spSolenoid2", 29);
 
+	/*
 	others[3].logicalChannel=ini->ReadInteger("PR","voltageChannel",6);
 
 	others[4].logicalChannel=ini->ReadInteger("OtherSettings","SensorSG",16);
@@ -87,6 +93,7 @@ void RLCard_parameters::LoadSettings(TIniFile* ini)
 	others[5].range=1; // плюс/минус 5В
 
 	others[6].logicalChannel=21;
+	*/
 
 	syncMode=ini->ReadInteger("LCard","SyncMode",0);
 	syncStartMode=ini->ReadInteger("LCard","SyncStartMode",0);

@@ -61,7 +61,8 @@ private:
 	void pr(AnsiString _msg);
 	vector <double>* SGbuffer;
 	bool IsBrak;
-
+	char *updateStatusBarBottomParam;
+	void __fastcall UpdateStatusBarBottom();
 public:
 	__fastcall ThreadOnLine(bool CreateSuspended,bool _Linear,CBank*_BankCross,
 		CBank*_BankLine,HWND _main_handle,UINT _thread_msg,TIniFile*_ini,vector <double> *_SGbuffer);

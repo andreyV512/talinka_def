@@ -230,11 +230,19 @@ void RLCard502::SetRawSize(int _size)
 // ---------------------------------------------------------------------------
 double RLCard502::GetValue(int _ch)
 {
-	double* buf = new double[Parameters->OSensors];
+//	double* buf = new double[Parameters->OSensors];
+	double buf[RLCard_parameters::others_sensors_count];
 	LFATAL("RLCard502::GetValue: не смогли получить значение: ",
 		L502_AsyncGetAdcFrame(handle, L502_PROC_FLAGS_VOLT, 1000, buf));
-	double ret = buf[_ch];
-	delete buf;
-	return (ret);
+	for(int i = 0, len = Parameters->others.size(); i < len; ++i)
+	{
+	   if(Parameters->others[i].logicalChannel == _ch)
+	   {
+		 return buf[i];
+	   }
+    }
+	//double ret = -1;
+//	delete buf;
+	return -1;
 }
 // ---------------------------------------------------------------------------
