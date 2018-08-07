@@ -202,9 +202,10 @@ object MainForm: TMainForm
     inherited gbCrossDef: TGroupBox
       Width = 744
       Height = 100
+      ExplicitWidth = 744
       ExplicitHeight = 100
       inherited Chart1: TChart
-        Width = 741
+        Width = 740
         Height = 49
         BottomAxis.ExactDateTime = False
         BottomAxis.Increment = 1.000000000000000000
@@ -226,7 +227,7 @@ object MainForm: TMainForm
         RightAxis.Automatic = False
         RightAxis.AutomaticMaximum = False
         RightAxis.AutomaticMinimum = False
-        ExplicitWidth = 743
+        ExplicitWidth = 740
         ExplicitHeight = 49
         inherited Series1: TBarSeries
           Data = {
@@ -290,7 +291,8 @@ object MainForm: TMainForm
         end
       end
       inherited Panel1: TPanel
-        Width = 741
+        Width = 740
+        ExplicitWidth = 740
       end
     end
   end
@@ -381,6 +383,7 @@ object MainForm: TMainForm
     inherited gbThickness: TGroupBox
       Width = 710
       Height = 100
+      ExplicitWidth = 710
       ExplicitHeight = 100
       inherited Chart1: TChart
         Height = 55
@@ -450,7 +453,6 @@ object MainForm: TMainForm
     Color = clMenuBar
     ColorMap.HighlightColor = clWhite
     ColorMap.UnusedColor = clWhite
-    Enabled = False
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlack
     Font.Height = -12
