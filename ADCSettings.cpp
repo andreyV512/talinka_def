@@ -90,11 +90,16 @@ void TADCSettForm::FillAllControls()
 		(ini->ReadInteger("OtherSettings", "WidthMedianFilter", 3));
 
 	// заполняем настройки соленоидов для БУРАН 5000
-	spCrossAmperage->Value = ini->ReadInteger("PP", "amperageChannel", 3);
-	spCrossVoltage->Value = ini->ReadInteger("PP", "voltageChannel", 4);
+	spIsSolenoidsON->Value = ini->ReadInteger("PP", "spIsSolenoidsON", 27);
+  //	spCrossAmperage->Value = ini->ReadInteger("PP", "amperageChannel", 3);
+	spSolenoid1->Value = ini->ReadInteger("PP", "spSolenoid1", 28);
+	 //	spCrossVoltage->Value = ini->ReadInteger("PP", "voltageChannel", 4);
+	spSolenoid2->Value = ini->ReadInteger("PP", "spSolenoid2", 29);
 
-	spLinearAmperage->Value = ini->ReadInteger("PR", "amperageChannel", 5);
-	spLinearVoltage->Value = ini->ReadInteger("PR", "voltageChannel", 6);
+	edSolenoidTresholdU->Text = FloatToStr(ini->ReadFloat("PP", "solenoidTresholdU", 9.1));
+
+  //	spLinearAmperage->Value = ini->ReadInteger("PR", "amperageChannel", 5);
+  //	spLinearVoltage->Value = ini->ReadInteger("PR", "voltageChannel", 6);
 
 	// Настройки фильтров продольного
 
@@ -108,7 +113,7 @@ void TADCSettForm::FillAllControls()
 void TADCSettForm::block()
 {
 	gbCross->Enabled = fl;
-	gbLinear->Enabled = fl;
+ //	gbLinear->Enabled = fl;
 	ComboBoxWidthMF->Enabled = fl;
 	ppKadr->Enabled = fl;
 	ppRate->Enabled = fl;
@@ -169,6 +174,18 @@ void __fastcall TADCSettForm::FormActivate(TObject *Sender)
 // ------------------------------------------------------------------------------
 void __fastcall TADCSettForm::bSaveClick(TObject *Sender)
 {
+	wchar_t *s = edSolenoidTresholdU->Text.c_str();
+	for(int i = 0, len = wcslen(s); i < len; ++i)
+	{
+		if(',' == s[i]){s[i] = '.'; break;}
+    }
+	double tmp = _wtof(s);
+	if(0.0 >= tmp)
+	{
+		Application->MessageBoxW(L"Порог перегрева соленоида введён некорректно",L"Ошибка",MB_OK|MB_ICONERROR);
+		return;
+	}
+	ini->WriteFloat("PP", "solenoidTresholdU", tmp);
 	// Сохраняем данные по датчикам
 	for (int i = 0; i < CSensors; i++)
 		CS[i]->SaveSettings();
@@ -184,11 +201,15 @@ void __fastcall TADCSettForm::bSaveClick(TObject *Sender)
 	ini->WriteInteger("OtherSettings", "WidthMedianFilter",
 		ComboBoxWidthMF->Text.ToInt());
 	// Данные по соленоидам
-	ini->WriteInteger("PP", "amperageChannel", spCrossAmperage->Value);
-	ini->WriteInteger("PP", "voltageChannel", spCrossVoltage->Value);
 
-	ini->WriteInteger("PR", "amperageChannel", spLinearAmperage->Value);
-	ini->WriteInteger("PR", "voltageChannel", spLinearVoltage->Value);
+	ini->WriteInteger("PP", "spIsSolenoidsON", spIsSolenoidsON->Value);
+//	ini->WriteInteger("PP", "amperageChannel", spCrossAmperage->Value);
+ini->WriteInteger("PP", "spSolenoid1", spSolenoid1->Value);
+//	ini->WriteInteger("PP", "voltageChannel", spCrossVoltage->Value);
+ini->WriteInteger("PP", "spSolenoid2", spSolenoid2->Value);
+
+ //	ini->WriteInteger("PR", "amperageChannel", spLinearAmperage->Value);
+  //	ini->WriteInteger("PR", "voltageChannel", spLinearVoltage->Value);
 
 	ini->WriteFloat("LCard", "Kadr", (double)StrToFloat(this->ppKadr->Text));
 	ini->WriteFloat("LCard", "Rate", (double)StrToFloat(this->ppRate->Text));
@@ -443,3 +464,6 @@ void TADCSettForm::SaveTubeSettingsToFile(FILE *file)
 //	fwrite(oper.c_str(), size, 1, file);
 //	fclose(file);
 }
+
+
+

@@ -112,8 +112,8 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
 #ifndef NOL502
 	lcard = new LCardData(ini);
 #endif
-	CrossSolenoid = new Solenoid("PP");
-	LinearSolenoid = new Solenoid("PR");
+	CrossSolenoid = new Solenoid();//"PP");
+   //	LinearSolenoid = new Solenoid("PR");
 
 	TPr::pr("ага");
 	Singleton = new CSingleton(ini, this);
@@ -217,7 +217,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 	ini->WriteString("Default", "TypeSize", cbTypeSize->Text);
 	ini->WriteBool("Default", "IsInterruptView", cbInterruptView->Checked);
 	delete CrossSolenoid;
-	delete LinearSolenoid;
+  //	delete LinearSolenoid;
 
 	UnregisterHotKey(Handle, // Handle окна
 		0x00E); // наш идентификатор горячего ключа

@@ -12,6 +12,7 @@
 #include "LCardData.h"
 #include "Singleton.h"
 #include "DebugMess.h"
+#include "Main.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -52,6 +53,7 @@ __fastcall ThreadOnLine::~ThreadOnLine(void)
 // -----запуск потока работы--------------------------------------------------
 void __fastcall ThreadOnLine::Execute()
 {
+//.вставить ini->ReadInteger("PP", "spIsSolenoidsON", 27);
 	NameThreadForDebugging("WorkOnlineThread");
 	SetStext1("Режим \"Работа (Д)\"");
 	SetStext2("Готовим к исходному положению");
@@ -171,7 +173,47 @@ UnicodeString ThreadOnLine::PrepareForWork()
 	}
 	*/
 	Sleep(500);
-
+    AnsiString a = "Соленоид поперечный: ";
+	bool solinoidOn = CrossSolenoid->SolenoidOn();
+	if(solinoidOn)
+	{
+		a += "включён";
+	}
+	else
+	{
+		a += "отключён";
+	}
+	TPr::pr(a);
+	if(solinoidOn)
+	{
+		char *a = "Нет поля поперечного соленоида";
+		TPr::pr(a);
+		MainForm->StatusBarBottom->Panels->Items[2]->Text = a;
+		MainForm->StatusBarBottom->Refresh();
+		return a;
+	}
+	double t = 0;
+	if(!CrossSolenoid->Solenoid1U(t))
+	{
+		char *a = "Перегрев поперечного соленоида 1";
+		TPr::pr(a);
+		char buf[128];
+		sprintf(buf, "%s %.1f", a, t);
+		MainForm->StatusBarBottom->Panels->Items[2]->Text = buf;
+		MainForm->StatusBarBottom->Refresh();
+		 return a;
+	}
+	if(!CrossSolenoid->Solenoid2U(t))
+	{
+		char *a = "Перегрев поперечного соленоида 2";
+		TPr::pr(a);
+		char buf[128];
+		sprintf(buf, "%s %.1f", a, t);
+		MainForm->StatusBarBottom->Panels->Items[2]->Text = buf;
+		MainForm->StatusBarBottom->Refresh();
+		 return a;
+	}
+   /*
 	AnsiString a = "Соленоид поперечный: ";
 	a += CrossSolenoid->GetUIR();
 	TPr::pr(a);
@@ -185,6 +227,7 @@ UnicodeString ThreadOnLine::PrepareForWork()
 		SLD->oCSOLPOW->Set(false);
 		return "Сопротивление поперечного соленоида превысило норму";
 	}
+	*/
 	/*
 	if (Linear)
 	{

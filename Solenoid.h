@@ -9,30 +9,38 @@ public:
 	// ! @brief Конструктор с параметрами
 	// ! @param _lc Указатель на L-Card, с которого считываем значения
 	// ! @param TypeOfControl Тип контроля - PP или PR
-	Solenoid(String TypeOfControl);
+	Solenoid();//String TypeOfControl);
+	bool SolenoidOn();
+	bool Solenoid1U(double &);
+	bool Solenoid2U(double &);
+	private:
+	int channelSolenoidsON;
+	int channelSolinoid1;
+	int channelSolinoid2;
+	double solenoidTresholdU;
 	// ! Получить значение тока соленоида
-	double getAmperage();
+ //	double getAmperage();
 	// ! Получить значение напряжения соленоида
-	double getVoltage();
+   //	double getVoltage();
 	// ! Рассчитать значение температуры соленоида
-	double getResist();
+ //	double getResist();
 	// ! Проверяет, не перегрелся ли соленоид
-	bool OkResist();
-	bool OkU(void);
-	AnsiString GetUIR(void);
+ //	bool OkResist();
+ //	bool OkU(void);
+  //	AnsiString GetUIR(void);
 
 private:
 	// ! Коэффициент сопротивления
-	double Devider;
+  //	double Devider;
 	// ! Канал L-Card, на который подключен вывод тока
-	int chAmperage;
+  //	int chAmperage;
 	// ! Канал L-Card, на который подключен вывод напряжения
-	int chVoltage;
+  //	int chVoltage;
 	// ! Критический уровень температуры, выше которого считаем перегрев
-	float AlarmLevel;
-	float AlarmULevel;
-	float DifULevel;
+//	float AlarmLevel;
+  //	float AlarmULevel;
+ //	float DifULevel;
 };
 extern Solenoid *CrossSolenoid;
-extern Solenoid *LinearSolenoid;
+//extern Solenoid *LinearSolenoid;
 #endif

@@ -33,13 +33,16 @@ void __fastcall TManageForm::FormShow(TObject *Sender)
 	off=(TColor)ini->ReadInteger("Color","NotActiveIn",0);
 	move=(TColor)ini->ReadInteger("Color","NotActiveOut",0);
 
+	AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
+		workSpeed = ini->ReadInteger(sect, "WorkSpeed", 4);
+
 	delete ini;
 
 	TPr::pr("TManageForm::FormShow: getParameterSpeed");
-	eFriquencyRot->Text=IntToStr(frConverter->getParameterSpeed(Globals::defaultRotParameter));
+  //	eFriquencyRot->Text=IntToStr(frConverter->getParameterSpeed(Globals::defaultRotParameter));
 	TPr::pr("TManageForm::FormShow: getParameterSpeed ---");
 
-	bRotation->Caption="Включить вращение";
+  //	bRotation->Caption="Включить вращение";
 	// включаем таймер, отслеживающий состояние входов и выходов
 	butt_enabled=true;
 	this->StatusBarBottom->Panels->Items[0]->Text="";
@@ -55,8 +58,8 @@ void __fastcall TManageForm::FormClose(TObject *Sender,TCloseAction &Action)
 	// сбрасываем сигналы, если пользователь забыл об этом
 	SLD->oCSOLPOW->Set(false);
    //	SLD->oLSOLPOW->Set(false);
-	bLinearSolenoid->Caption="Включить магнитное поле";
-	bCrossSolenoid->Caption="Включить магнитное поле";
+   //	bLinearSolenoid->Caption="Включить магнитное поле";
+   //	bCrossSolenoid->Caption="Включить магнитное поле";
 }
 // ---------------------------------------------------------------------------
 void __fastcall TManageForm::FormKeyPress(TObject *Sender,wchar_t &Key)
@@ -103,6 +106,8 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 {
 	if(SLD->iLPCHRUN->Get())
 	{
+		frConverter->stopRotation();
+		/*
 		if(!frConverter->stopRotation())
 		{
 			StatusBarBottom->Panels->Items[0]->Text="Не удалось остановить вращение";
@@ -110,14 +115,18 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 		}
 		else
 		{
-			bRotation->Caption="Включить вращение";
+		  //	bRotation->Caption="Включить вращение";
 			StatusBarBottom->Panels->Items[0]->Text="Остановили вращение";
 			StatusBarBottom->Refresh();
 		}
+		*/
 	}
 	else
 	{
-		if(!frConverter->setParameterSpeed(Globals::defaultRotParameter,StrToInt(eFriquencyRot->Text)))
+		frConverter->setParameterSpeed(Globals::defaultRotParameter, workSpeed);
+		frConverter->startRotation();
+		/*
+		if(!frConverter->setParameterSpeed(Globals::defaultRotParameter, workSpeed))
 		{
 			StatusBarBottom->Panels->Items[0]->Text="Не удалось выставить скорость";
 			StatusBarBottom->Refresh();
@@ -129,23 +138,40 @@ void __fastcall TManageForm::bRotationClick(TObject *Sender)
 		else
 		{
 			StatusBarBottom->Panels->Items[0]->Text="Включили вращение";
-			bRotation->Caption="Выключить вращение";
+		  //	bRotation->Caption="Выключить вращение";
 		}
-
-		StatusBarBottom->Refresh();
+		 */
+		//StatusBarBottom->Refresh();
 	}
 }
 // ---------------------------------------------------------------------------
 
 void __fastcall TManageForm::TimerTimer(TObject *Sender)
 {
-	if(SLD->oCSOLPOW->Get() && !CrossSolenoid->OkResist())
+		if(CrossSolenoid->SolenoidOn())
+		{
+			 lbSolenoidON->Caption = "Магнитное поле включено";
+		}
+		else
+		{
+             lbSolenoidON->Caption = "Магнитное поле отключено";
+		}
+		double t;
+		CrossSolenoid->Solenoid1U(t);
+		t = int(10 * t) / 10.0;
+		edSolenoid1->Text = FloatToStr(t);
+		CrossSolenoid->Solenoid2U(t);
+		t = int(10 * t) / 10.0;
+		edSolenoid2->Text = FloatToStr(t);
+/*
+	if(SLD->oCSOLPOW->Get() && !CrossSolenoid->SolenoidOn())//OkResist())
 	{
 		SLD->oCSOLPOW->Set(false);
 		bCrossSolenoid->Caption="Включить магнитное поле";
 		StatusBarBottom->Panels->Items[0]->Text="Соленоиды поперечного перегреты";
 		StatusBarBottom->Refresh();
 	}
+	*/
 	/*
 	if(SLD->oLSOLPOW->Get() && !LinearSolenoid->OkResist())
 	{
@@ -168,6 +194,7 @@ void __fastcall TManageForm::TimerTimer(TObject *Sender)
 		eLinearTemperature->Text=" ";
 	}
 	*/
+	/*
 	if(SLD->oCSOLPOW->Get())
 	{
 		eCrossAmperage->Text=FloatToStrF(CrossSolenoid->getAmperage(),ffNumber,8,1);
@@ -180,5 +207,7 @@ void __fastcall TManageForm::TimerTimer(TObject *Sender)
 		eCrossVoltage->Text=" ";
 		eCrossTemperature->Text=" ";
 	}
+	*/
 }
 // ---------------------------------------------------------------------------
+

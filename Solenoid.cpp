@@ -10,10 +10,11 @@
 Solenoid *CrossSolenoid = NULL;
 Solenoid *LinearSolenoid = NULL;
 
-Solenoid::Solenoid(String TypeOfControl)
+Solenoid::Solenoid()//String TypeOfControl)
 {
 	// typeOfControl - PP или PR
 	TIniFile *ini = new TIniFile(Globals::IniFileName);
+	/*
 	if (TypeOfControl == "PP")
 	{
 		chAmperage = 0;
@@ -31,11 +32,31 @@ Solenoid::Solenoid(String TypeOfControl)
 		DifULevel = (float)ini->ReadFloat("PR", "DifVoltageSolenoid", 20);
 	}
 	Devider = ini->ReadFloat(TypeOfControl, "Devider", 72.0);
-
+	 */
+	channelSolenoidsON = ini->ReadInteger("PP", "spIsSolenoidsON", 27);
+	solenoidTresholdU = ini->ReadFloat("PP", "solenoidTresholdU", 9.0);
+	channelSolinoid1 = ini->ReadInteger("PP", "spSolenoid1", 28);
+	channelSolinoid2 = ini->ReadInteger("PP", "spSolenoid2", 29);
 	delete ini;
 }
 
 // ---------------------------------------------------------------------------
+bool Solenoid::SolenoidOn()
+{
+	return 2 > lcard->GetValue(channelSolenoidsON);
+}
+
+bool Solenoid::Solenoid1U(double &t)
+{
+	t = lcard->GetValue(channelSolinoid1);
+   return t < solenoidTresholdU;
+}
+bool Solenoid::Solenoid2U(double &t)
+{
+   t = lcard->GetValue(channelSolinoid2);
+   return t < solenoidTresholdU;
+}
+/*
 double Solenoid::getAmperage()
 {
 	double I = lcard->GetValue(chAmperage);
@@ -89,3 +110,4 @@ AnsiString Solenoid::GetUIR(void)
 	ret.printf("U=%.3lf I=%.3lf R=%.3lf", u, i, R);
 	return (ret);
 }
+*/

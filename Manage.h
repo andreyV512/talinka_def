@@ -15,30 +15,15 @@
 class TManageForm : public TForm
 {
 __published:	// IDE-managed Components
-	TGroupBox *gbLinear;
 	TGroupBox *gbCross;
 	TStatusBar *StatusBarBottom;
-	TBitBtn *bRotation;
-	TTimer *TemperatureTimer;
-	TPanel *pCrossSolenoidNew;
-	TLabel *lCrossAmperage;
-	TLabel *lCrossVoltage;
-	TLabel *lCrossResistance;
-	TEdit *eCrossAmperage;
-	TEdit *eCrossVoltage;
-	TEdit *eCrossTemperature;
-	TPanel *pLinearSolenoid;
-	TLabel *lLinearAmperage;
-	TLabel *lLinearVoltage;
-	TLabel *lLinearResistance;
-	TEdit *eLinearAmperage;
-	TEdit *eLinearVoltage;
-	TEdit *eLinearTemperature;
-	TLabel *Label1;
-	TEdit *eFriquencyRot;
 	TTimer *Timer;
 	TBitBtn *bCrossSolenoid;
-	TBitBtn *bLinearSolenoid;
+	TLabel *lbSolenoidON;
+	TLabel *Label1;
+	TLabel *Label2;
+	TEdit *edSolenoid1;
+	TEdit *edSolenoid2;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, wchar_t &Key);
@@ -82,7 +67,7 @@ private:	// User declarations
 	Graphics::TBitmap *mod_serv, *mod_wrk,*mod_mvg;				// рисунки для кнопок cмены состояния модулей
 
 public:		// User declarations
-
+       int workSpeed;
 	__fastcall TManageForm(TComponent* Owner);
 };
 //---------------------------------------------------------------------------

@@ -35,8 +35,8 @@ __published: // IDE-managed Components
 	TLabel *lnumberChannel;
 	TLabel *lamperage;
 	TLabel *lTemp;
-	TCSpinEdit *spCrossAmperage;
-	TCSpinEdit *spCrossVoltage;
+	TCSpinEdit *spSolenoid1;
+	TCSpinEdit *spSolenoid2;
 	TTabSheet *OtherPage;
 	TCSpinEdit *SpinCurr;
 	TCSpinEdit *SpinSG;
@@ -59,12 +59,6 @@ __published: // IDE-managed Components
 	TEdit *ppRate;
 	TEdit *ppKadr;
 	TGroupBox *gbPR;
-	TGroupBox *gbLinear;
-	TLabel *lnumberchannelLinear;
-	TLabel *lLinearAmperage;
-	TLabel *lLinearTemp;
-	TCSpinEdit *spLinearAmperage;
-	TCSpinEdit *spLinearVoltage;
 	TLabel *Label15;
 	TLabel *Label16;
 	TLabel *Label4;
@@ -72,6 +66,10 @@ __published: // IDE-managed Components
 	TFilterSettings *FSLineOut;
 	TFilterSettings *FSLineIn;
 	TFilterSettings *FSCross;
+	TCSpinEdit *spIsSolenoidsON;
+	TLabel *Label6;
+	TEdit *edSolenoidTresholdU;
+	TLabel *Label7;
 
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall ApplicationEventsMessage(tagMSG &Msg, bool &Handled);
