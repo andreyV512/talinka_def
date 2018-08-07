@@ -18,7 +18,6 @@ object FRCross: TFRCross
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 744
     object Chart1: TChart
       Left = 2
       Top = 49
@@ -47,7 +46,6 @@ object FRCross: TFRCross
       Align = alClient
       BevelOuter = bvNone
       TabOrder = 0
-      ExplicitWidth = 740
       ColorPaletteIndex = 13
       object Series1: TBarSeries
         ColorEachPoint = True
@@ -311,7 +309,6 @@ object FRCross: TFRCross
       BevelOuter = bvNone
       TabOrder = 1
       OnResize = Panel1Resize
-      ExplicitWidth = 740
       object Label1: TLabel
         Left = 450
         Top = 5
@@ -324,6 +321,7 @@ object FRCross: TFRCross
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       inline FRBordersCross: TFRBorders
         Left = 90
@@ -343,11 +341,19 @@ object FRCross: TFRCross
         ExplicitTop = 1
         inherited Label13: TLabel
           Top = 4
+          Visible = False
           ExplicitTop = 4
         end
         inherited Label5: TLabel
           Top = 4
+          Visible = False
           ExplicitTop = 4
+        end
+        inherited EFinish: TEdit
+          Visible = False
+        end
+        inherited EStart: TEdit
+          Visible = False
         end
       end
       object Panel2: TPanel
@@ -364,6 +370,7 @@ object FRCross: TFRCross
         Font.Style = []
         ParentFont = False
         TabOrder = 2
+        Visible = False
       end
     end
   end

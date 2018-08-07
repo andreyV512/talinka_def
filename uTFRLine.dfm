@@ -42,6 +42,7 @@ object FRLine: TFRLine
         Font.Name = 'Tahoma'
         Font.Style = []
         ParentFont = False
+        Visible = False
       end
       object cbLinear: TCheckBox
         Left = 11
@@ -74,22 +75,27 @@ object FRLine: TFRLine
         Width = 295
         Height = 21
         TabOrder = 2
+        Visible = False
         ExplicitLeft = 720
         ExplicitTop = 2
         inherited Label13: TLabel
           Top = 4
+          Visible = False
           ExplicitTop = 4
         end
         inherited Label5: TLabel
           Top = 4
+          Visible = False
           ExplicitTop = 4
         end
         inherited EFinish: TEdit
           Top = 1
+          Visible = False
           ExplicitTop = 1
         end
         inherited EStart: TEdit
           Top = 1
+          Visible = False
           ExplicitTop = 1
         end
       end
@@ -107,6 +113,7 @@ object FRLine: TFRLine
         Font.Style = []
         ParentFont = False
         TabOrder = 3
+        Visible = False
       end
     end
     object Chart1: TChart

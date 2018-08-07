@@ -19,7 +19,6 @@ object FRThick: TFRThick
     Font.Style = []
     ParentFont = False
     TabOrder = 0
-    ExplicitWidth = 710
     object Label1: TLabel
       Left = 450
       Top = 23
@@ -32,6 +31,7 @@ object FRThick: TFRThick
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      Visible = False
     end
     object Label2: TLabel
       Left = 605
@@ -45,6 +45,7 @@ object FRThick: TFRThick
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      Visible = False
     end
     object Chart1: TChart
       Left = 2
@@ -175,6 +176,7 @@ object FRThick: TFRThick
       Font.Style = []
       ParentFont = False
       TabOrder = 2
+      Visible = False
     end
     object Panel2: TPanel
       Left = 695
@@ -189,6 +191,7 @@ object FRThick: TFRThick
       Font.Style = []
       ParentFont = False
       TabOrder = 3
+      Visible = False
     end
   end
 end

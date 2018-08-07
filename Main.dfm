@@ -204,7 +204,7 @@ object MainForm: TMainForm
       Height = 100
       ExplicitHeight = 100
       inherited Chart1: TChart
-        Width = 740
+        Width = 741
         Height = 49
         BottomAxis.ExactDateTime = False
         BottomAxis.Increment = 1.000000000000000000
@@ -226,6 +226,7 @@ object MainForm: TMainForm
         RightAxis.Automatic = False
         RightAxis.AutomaticMaximum = False
         RightAxis.AutomaticMinimum = False
+        ExplicitWidth = 743
         ExplicitHeight = 49
         inherited Series1: TBarSeries
           Data = {
@@ -289,7 +290,7 @@ object MainForm: TMainForm
         end
       end
       inherited Panel1: TPanel
-        Width = 740
+        Width = 741
       end
     end
   end
