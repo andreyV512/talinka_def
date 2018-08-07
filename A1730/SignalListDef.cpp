@@ -9,28 +9,28 @@ SignalListDef::SignalListDef(TIniFile* _ini) : SignalList(_ini)
 	iLPCHA = Find("Прод ПЧ А", true);
 	iLPCHRUN = Find("Прод ПЧ RUN", true);
 	iCSTROBE = Find("СТРОБ 2", true);
-	iLSTROBE = Find("СТРОБ 3", true);
+	iLSTROBE = Find("СТРОБ 1", true);
 	iCCYCLE = Find("ЦИКЛ 2", true);
-	iLCYCLE = Find("ЦИКЛ 3", true);
+	iLCYCLE = Find("ЦИКЛ 1", true);
 	iREADY = Find("Готовность", true);
 	iCCONTROL = Find("КОНТРОЛЬ 2", true);
-	iLCONTROL = Find("КОНТРОЛЬ 3", true);
+	iLCONTROL = Find("КОНТРОЛЬ 1", true);
 	iSOP = Find("РЕЖИМ СОП", true);
 	iSQ1 = Find("SQ21", true);
 
   //	oLPCHPOW = Find("ПИТАНИЕ ПЧ МОД.3", false);
 	oLSCANPOW = Find("ПИТАНИЕ СУ МОД.3", false);
 	//oLSOLPOW = Find("НАМАГНИЧИВАНИЕ 3", false);
-	oCSOLPOW = Find("НАМАГНИЧИВАНИЕ 2", false);
+	oCSOLPOW = Find("НАМАГНИЧИВАНИЕ", false);
 	oCWORK = Find("РАБОТА 2", false);
-	oLWORK = Find("РАБОТА 3", false);
+	oLWORK = Find("РАБОТА 1", false);
 	oCMEAS = Find("ИЗМЕРЕНИЕ 2", false);
-	oLMEAS = Find("ИЗМЕРЕНИЕ 3", false);
+	oLMEAS = Find("ИЗМЕРЕНИЕ 1", false);
 	oSHIFT = Find("ПЕРЕКЛАДКА", false);
 	oCSTROBE = Find("СТРОБ ЗОНЫ 2", false);
-	oLSTROBE = Find("СТРОБ ЗОНЫ 3", false);
+	oLSTROBE = Find("СТРОБ ЗОНЫ 1", false);
 	oCRESULT = Find("РЕЗУЛЬТАТ 2", false);
-	oLRESULT = Find("РЕЗУЛЬТАТ 3", false);
+	oLRESULT = Find("РЕЗУЛЬТАТ 1", false);
 	
 	oSTF = Find("STF", false);
 	oRL  = Find("RL", false);
