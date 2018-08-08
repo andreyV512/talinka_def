@@ -1012,7 +1012,7 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Äèàãíîñòèêà")->Visible = state;
 //	ActionManager1->FindItemByCaption("Ãğóïïà ïğî÷íîñòè")->Visible = state;
 	ActionManager1->FindItemByCaption("Ïîìîùü")->Visible = state;
-	ActionManager1->FindItemByCaption("Âûãîí òğóáû")->Visible = state;
+	//ActionManager1->FindItemByCaption("Âûãîí òğóáû")->Visible = state;
  //	ActionManager1->FindItemByCaption("Êîíòğîëü ÑÎÏ")->Visible = state;
     SetEvent(hEvent);
 	// menuTest->Enabled = state;

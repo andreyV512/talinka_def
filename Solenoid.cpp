@@ -5,6 +5,7 @@
 #include "LCardData.h"
 #include "Protocol.h"
 #include "Global.h"
+#include "tools_debug/DebugMess.h"
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 Solenoid *CrossSolenoid = NULL;
@@ -43,7 +44,9 @@ Solenoid::Solenoid()//String TypeOfControl)
 // ---------------------------------------------------------------------------
 bool Solenoid::SolenoidOn()
 {
-	return 2 > lcard->GetValue(channelSolenoidsON);
+	double t = lcard->GetValue(channelSolenoidsON);
+	dprint("solenoid on %f\n", t);
+	return 2 >  t;
 }
 
 bool Solenoid::Solenoid1U(double &t)

@@ -135,6 +135,27 @@ void __fastcall ThreadOnLine::UpdateStatusBarBottom()
 // -----подготовка к работе от самого начала до движения трубы----------------
 UnicodeString ThreadOnLine::PrepareForWork()
 {
+	double t = 0;
+	if(!CrossSolenoid->Solenoid1U(t))
+	{
+		char *a = "Перегрев поперечного соленоида 1";
+		TPr::pr(a);
+		char buf[128];
+		 sprintf(buf, "%s %.1f", a, t);
+		 updateStatusBarBottomParam = buf;
+		 Synchronize(&UpdateStatusBarBottom);
+		 return a;
+	}
+	if(!CrossSolenoid->Solenoid2U(t))
+	{
+		char *a = "Перегрев поперечного соленоида 2";
+		TPr::pr(a);
+		char buf[128];
+		sprintf(buf, "%s %.1f", a, t);
+		updateStatusBarBottomParam = buf;
+		 Synchronize(&UpdateStatusBarBottom);
+		 return a;
+	}
    //	SLD->oLPCHPOW->Set(true);
 	// ждем цех цикл
 	SetStext2("Ждем сигнала \"Попер Цикл\"");
@@ -170,7 +191,7 @@ UnicodeString ThreadOnLine::PrepareForWork()
 	SLD->oLRESULT->Set(false);
 	SLD->oCRESULT->Set(false);
 
-	SLD->oCSOLPOW->Set(true);
+	SLD->oCSOLPOW->Set(false);
 	/*
 	if (Linear)
 	{
@@ -178,30 +199,10 @@ UnicodeString ThreadOnLine::PrepareForWork()
 		SLD->oLSOLPOW->Set(true);
 	}
 	*/
-	Sleep(500);
+	//Sleep(500);
 
-	double t = 0;
-	if(!CrossSolenoid->Solenoid1U(t))
-	{
-		char *a = "Перегрев поперечного соленоида 1";
-		TPr::pr(a);
-		char buf[128];
-		 sprintf(buf, "%s %.1f", a, t);
-		 updateStatusBarBottomParam = buf;
-		 Synchronize(&UpdateStatusBarBottom);
-		 return a;
-	}
-	if(!CrossSolenoid->Solenoid2U(t))
-	{
-		char *a = "Перегрев поперечного соленоида 2";
-		TPr::pr(a);
-		char buf[128];
-		sprintf(buf, "%s %.1f", a, t);
-		updateStatusBarBottomParam = buf;
-		 Synchronize(&UpdateStatusBarBottom);
-		 return a;
-	}
-	SLD->oCSOLPOW->Set(false);
+
+	SLD->oCSOLPOW->Set(true);
 	Sleep(500);
 	 AnsiString a = "Соленоид поперечный: ";
 	bool solinoidOn = CrossSolenoid->SolenoidOn();
@@ -214,7 +215,7 @@ UnicodeString ThreadOnLine::PrepareForWork()
 		a += "отключён";
 	}
 	TPr::pr(a);
-	if(solinoidOn)
+	if(!solinoidOn)
 	{
 		char *a = "Нет поля поперечного соленоида";
 		TPr::pr(a);
@@ -317,6 +318,10 @@ bool ThreadOnLine::OnlineCycle()
 	int LineStrobes = 0;
 	unsigned crossTimeControl = 0;
 	unsigned longTimeControl = 0;
+
+	unsigned delayCrossTimeControl = 0;
+	unsigned delayLongTimeControl = 0;
+
 	unsigned SQ1TimeControl = 0;
 	double speedTube = 0.4;
 	bool SLD_iCSTROBE_Get = false;  // заглушка на отсутствие лир
@@ -334,31 +339,59 @@ bool ThreadOnLine::OnlineCycle()
 			dprint("SQ1TimeControl %d\n", SQ1TimeControl);
 		}
 
-		double p = speedTube * (int)(crossTimeControl - tick);
-		if(p > 200)
+		if(crossTimeControl > 0)
 		{
-		   crossTimeControl += int((p - 200) / speedTube);
+		double p = speedTube * (int)(tick - crossTimeControl);
+		//dprint("crossTimeControl %f\n", p);
+			if(p > 200)
+			{
+				crossTimeControl += int((400 - p) / speedTube);
 
-		   if(!SLD_iCSTROBE_Get)dprint("SLD_iCSTROBE_Get ON\n");
-		   SLD_iCSTROBE_Get = true;
+		   //		dprint("SLD_iCSTROBE_Get ON\n");
+				SLD_iCSTROBE_Get = true;
+			}
+			else if(p > 100)
+			{
+			//	dprint("SLD_iCSTROBE_Get OFF\n");
+				SLD_iCSTROBE_Get = false;
+			}
 		}
-		else if(p > 100)
+		else  if(delayCrossTimeControl > 0)
 		{
-			if(SLD_iCSTROBE_Get)dprint("SLD_iCSTROBE_Get OFF\n");
-			SLD_iCSTROBE_Get = false;
+				double p = speedTube * (int)(tick - delayCrossTimeControl);
+
+				if(p > 150)
+				{
+					crossTimeControl = tick;
+					dprint("delayCrossTimeControl %f\n", p);
+				}
 		}
 
-		p = speedTube * (int)(longTimeControl - tick);
-		if(p > 200)
+		//p = speedTube * (int)(tick - longTimeControl);
+		if(longTimeControl > 0)
 		{
-		   longTimeControl += int((p - 200) / speedTube);
-		   if(!SLD_iLSTROBE_Get)dprint("SLD_iCSTROBE_Get ON\n");
-		   SLD_iLSTROBE_Get = true;
+			double p = speedTube * (int)(tick - longTimeControl);
+			if(p > 200)
+			{
+			  longTimeControl += int((400 - p) / speedTube);
+			 //  dprint("SLD_iCSTROBE_Get ON\n");
+			 SLD_iLSTROBE_Get = true;
+			}
+			else if(p > 100)
+			{
+	   //		dprint("SLD_iCSTROBE_Get OFF\n");
+				SLD_iLSTROBE_Get = false;
+			}
 		}
-		else if(p > 100)
+		else  if(delayLongTimeControl > 0)
 		{
-			if(SLD_iLSTROBE_Get)dprint("SLD_iCSTROBE_Get OFF\n");
-			SLD_iLSTROBE_Get = false;
+				double p = speedTube * (int)(tick - delayLongTimeControl);
+
+				if(p > 350)
+				{
+					longTimeControl = tick;
+					dprint("delayLongTimeControl %f\n", p);
+				}
 		}
 			// заглушка на отсутствие лир конец
 
@@ -382,8 +415,8 @@ bool ThreadOnLine::OnlineCycle()
 		   //		Singleton->isSOP = SLD->iSOP->WasConst(true,50);
 		   //		if(Singleton->isSOP) pr("THIS IS SOP!!!"); //todo убрать после отладки
 
-				crossTimeControl = GetTickCount();
-				speedTube = (double)unitBaseMMCross / (crossTimeControl - SQ1TimeControl);
+				delayCrossTimeControl = GetTickCount();
+				speedTube = (double)unitBaseMMCross / (delayCrossTimeControl - SQ1TimeControl);
 				dprint("cross Speed %f\n", speedTube);
 			}
 			// Обсчитываем поперечный модуль
@@ -442,8 +475,8 @@ bool ThreadOnLine::OnlineCycle()
 				TPr::pr(stext2);
 				Post(UPDATE_STATUS);
 
-				longTimeControl = GetTickCount();
-				speedTube = (double)unitBaseMMLong / (longTimeControl - SQ1TimeControl);
+				delayLongTimeControl = GetTickCount();
+				speedTube = (double)unitBaseMMLong / (delayLongTimeControl - SQ1TimeControl);
 				dprint("long Speed %f\n", speedTube);
 
 			}
@@ -549,6 +582,7 @@ bool ThreadOnLine::OnlineCycle()
 			// Collect = false;
 			TPr::pr(stext2);
 			pr("Задержка по выходу");
+		  //	Sleep(300);
 		}
 		if (ToFinish)
 		{
