@@ -150,7 +150,7 @@ object MainForm: TMainForm
     OnSelect = cbTypeSizeSelect
   end
   object bManage: TButton
-    Left = 525
+    Left = 531
     Top = 74
     Width = 120
     Height = 41
@@ -473,6 +473,8 @@ object MainForm: TMainForm
     inherited GroupBox1: TGroupBox
       Width = 179
       Height = 74
+      ExplicitLeft = 144
+      ExplicitTop = 2
       ExplicitWidth = 179
       ExplicitHeight = 74
     end
@@ -537,6 +539,21 @@ object MainForm: TMainForm
       TabOrder = 0
       OnClick = bWinWorkOkClick
     end
+  end
+  object ExitTube: TButton
+    Left = 657
+    Top = 74
+    Width = 120
+    Height = 41
+    Caption = #1042#1099#1075#1086#1085' '#1090#1088#1091#1073#1099
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 18
+    OnClick = ExitTubeClick
   end
   object SaveToFileDialog: TSaveDialog
     DefaultExt = '.dkb'

@@ -98,7 +98,8 @@ __published: // IDE-managed Components
 	TPanel *WinWorkPanel;
 	TLabel *lWinWorkMessage;
 	TTimer *WinWorkTimer;
-	TButton *bWinWorkOk; // очищает все графики
+	TButton *bWinWorkOk;
+	TButton *ExitTube; // очищает все графики
 
 	void __fastcall MainFormInit(TObject *Sender);
 	// выравнивает объекты на форме, работает в начале работы и при Resize
@@ -135,6 +136,7 @@ __published: // IDE-managed Components
 	void __fastcall FRSOP1cbEtalonViewClick(TObject *Sender);
 	void __fastcall WinWorkTimerTimer(TObject *Sender);
 	void __fastcall bWinWorkOkClick(TObject *Sender);
+	void __fastcall ExitTubeClick(TObject *Sender);
 
 private: // User declarations
 
@@ -199,7 +201,7 @@ private: // User declarations
 	int MuchWinWorkTime;
 
 public: // User declarations
-
+       HANDLE hEvent;
 	__fastcall TMainForm(TComponent* Owner);
 };
 

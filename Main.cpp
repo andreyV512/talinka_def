@@ -76,6 +76,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender)
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
+hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	DBS = new CDBS();
 	LoadFormPos(this, ini);
 	AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
@@ -207,6 +208,7 @@ void TMainForm::Post(void)
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormDestroy(TObject *Sender)
 {
+	frConverter->stopRotation();
 	DragAcceptFiles(Handle, false); // Запрещаем перетаскивание файлов
 
    //	SLD->oLSOLPOW->Set(false);
@@ -236,6 +238,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 		delete BankLine;
 	delete ini;
 	delete DBS;
+	CloseHandle(hEvent);
 }
 
 // ---------------------------------------------------------------------------
@@ -1103,6 +1106,55 @@ void __fastcall TMainForm::bWinWorkOkClick(TObject *Sender)
 	WinWorkPanel->Visible=false;
 }
 //---------------------------------------------------------------------------
+DWORD WINAPI TestInputBitCycle3(PVOID p)
+{
+	while(true)
+	{
+		DWORD res = WaitForSingleObject(((TMainForm *)p)->hEvent, 500);
+		if((WAIT_TIMEOUT == res && SLD->iLCONTROL->Get()) || WAIT_OBJECT_0 == res)
+		{
+			SLD->oLWORK->Set(false);
+			((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+			frConverter->stopRotation();
+			((TMainForm *)p)->ExitTube->Tag = 0;
+			return 0;
+		}
+	}
+}
+
+void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
+{
+if(0 == ExitTube->Tag)
+{
+		if(!SLD->iCC->Get())
+		{
+		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
+		StatusBarBottom->Refresh();
+			  return;
+		}
+		else
+		{
+		StatusBarBottom->Panels->Items[2]->Text = "";
+		StatusBarBottom->Refresh();
+        }
+			AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
+		int speed = ini->ReadInteger(sect, "WorkSpeed", 4);
+		if (frConverter->setParameterSpeed(Globals::defaultRotParameter, speed))
+		{
+			ExitTube->Caption = "СТОП вращения";
+			ExitTube->Tag = 1;
+			frConverter->startRotation();
+			Sleep(1000);
+			SLD->oLWORK->Set(true);
+			Sleep(1000);
+			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
+		}
+}else
+{
+	SetEvent(hEvent);
+	dprint("Event\n");
+}
+}
 
 
 
