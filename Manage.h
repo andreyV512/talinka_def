@@ -24,6 +24,11 @@ __published:	// IDE-managed Components
 	TLabel *Label2;
 	TEdit *edSolenoid1;
 	TEdit *edSolenoid2;
+	TGroupBox *GroupBox1;
+	TButton *btRotation;
+	TCheckBox *cbRL;
+	TCheckBox *cbRM;
+	TCheckBox *cbRH;
 	void __fastcall FormShow(TObject *Sender);
 	void __fastcall FormClose(TObject *Sender, TCloseAction &Action);
 	void __fastcall FormKeyPress(TObject *Sender, wchar_t &Key);
@@ -31,6 +36,7 @@ __published:	// IDE-managed Components
 	void __fastcall bCrossSolenoidClick(TObject *Sender);
 	void __fastcall bRotationClick(TObject *Sender);
 	void __fastcall TimerTimer(TObject *Sender);
+	void __fastcall btRotationClick(TObject *Sender);
 
 
 private:	// User declarations

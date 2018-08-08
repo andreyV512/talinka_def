@@ -48,6 +48,7 @@ void __fastcall TManageForm::FormShow(TObject *Sender)
 	this->StatusBarBottom->Panels->Items[0]->Text="";
 	this->StatusBarBottom->Refresh();
 	Timer->Enabled=true;
+	bCrossSolenoid->Caption="Включить магнитное поле";
   //	SLD->oLPCHPOW->Set(true);
 }
 // ---------------------------------------------------------------------------
@@ -60,6 +61,7 @@ void __fastcall TManageForm::FormClose(TObject *Sender,TCloseAction &Action)
    //	SLD->oLSOLPOW->Set(false);
    //	bLinearSolenoid->Caption="Включить магнитное поле";
    //	bCrossSolenoid->Caption="Включить магнитное поле";
+   frConverter->stopRotation();
 }
 // ---------------------------------------------------------------------------
 void __fastcall TManageForm::FormKeyPress(TObject *Sender,wchar_t &Key)
@@ -210,4 +212,49 @@ void __fastcall TManageForm::TimerTimer(TObject *Sender)
 	*/
 }
 // ---------------------------------------------------------------------------
+
+void __fastcall TManageForm::btRotationClick(TObject *Sender)
+{
+	if(1 == btRotation->Tag)
+	{
+		btRotation->Tag = 0;
+		btRotation->Caption = "Вращать";
+		frConverter->stopRotation();
+		StatusBarBottom->Panels->Items[0]->Text="Стоп вращения";
+		StatusBarBottom->Refresh();
+	}
+	else
+	{
+
+		int speed = 0;
+		if(cbRL->Checked) speed = 1;
+		if(cbRM->Checked) speed |= 2;
+		if(cbRH->Checked) speed |= 4;
+		if(!frConverter->setParameterSpeed(Globals::defaultRotParameter, speed))
+		{
+			StatusBarBottom->Panels->Items[0]->Text="Не удалось выставить скорость вращение";
+			StatusBarBottom->Refresh();
+			return;
+		}
+		else
+		{
+			StatusBarBottom->Panels->Items[0]->Text="";
+			StatusBarBottom->Refresh();
+		}
+		if(!frConverter->startRotation())
+		{
+            StatusBarBottom->Panels->Items[0]->Text="Не удалось включить вращение";
+			StatusBarBottom->Refresh();
+			return;
+		}
+		else
+		{
+             StatusBarBottom->Panels->Items[0]->Text="";
+			StatusBarBottom->Refresh();
+		}
+		btRotation->Tag = 1;
+		btRotation->Caption = "Остановить";
+	}
+}
+//---------------------------------------------------------------------------
 

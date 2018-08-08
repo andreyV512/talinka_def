@@ -5,7 +5,7 @@ object ManageForm: TManageForm
   BorderStyle = bsSingle
   Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072#1084#1080
   ClientHeight = 193
-  ClientWidth = 412
+  ClientWidth = 648
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -84,7 +84,7 @@ object ManageForm: TManageForm
     AlignWithMargins = True
     Left = 3
     Top = 159
-    Width = 406
+    Width = 642
     Height = 31
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -97,7 +97,47 @@ object ManageForm: TManageForm
       end>
     ParentColor = True
     UseSystemFont = False
-    ExplicitWidth = 439
+  end
+  object GroupBox1: TGroupBox
+    Left = 410
+    Top = 8
+    Width = 231
+    Height = 145
+    Caption = #1052#1086#1076#1091#1083#1100' '#1087#1088#1086#1076#1086#1083#1100#1085#1086#1081' '#1076#1077#1092#1077#1082#1090#1086#1089#1082#1086#1087#1080#1080
+    TabOrder = 2
+    object btRotation: TButton
+      Left = 16
+      Top = 35
+      Width = 121
+      Height = 47
+      Caption = #1042#1088#1072#1097#1072#1090#1100
+      TabOrder = 0
+      OnClick = btRotationClick
+    end
+    object cbRL: TCheckBox
+      Left = 176
+      Top = 31
+      Width = 41
+      Height = 17
+      Caption = 'RL'
+      TabOrder = 1
+    end
+    object cbRM: TCheckBox
+      Left = 176
+      Top = 54
+      Width = 41
+      Height = 17
+      Caption = 'RM'
+      TabOrder = 2
+    end
+    object cbRH: TCheckBox
+      Left = 176
+      Top = 77
+      Width = 41
+      Height = 17
+      Caption = 'RH'
+      TabOrder = 3
+    end
   end
   object Timer: TTimer
     Enabled = False
