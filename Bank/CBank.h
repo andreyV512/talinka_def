@@ -12,7 +12,9 @@ private:
 	TCriticalSection* cs;
 	//зона.датчик.измерение
 	vector<vector<vector<double> > >Source;
+public:
 	unsigned int zones;
+private:
 	unsigned int sensors;
 	unsigned int last;
 

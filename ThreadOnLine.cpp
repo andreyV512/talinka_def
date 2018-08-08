@@ -270,7 +270,7 @@ UnicodeString ThreadOnLine::PrepareForWork()
 			return "Не удалось включить вращение продольного модуля";
 		if (!SLD->iLPCHRUN->Wait(false, 5000))
 			return "Не достигнута скорость вращения продольного модуля!";
-		SLD->SetInvA(true);
+	  //	SLD->SetInvA(true);
 	}
 	lcard->LoadSettings();
 	return "ok";
@@ -327,6 +327,8 @@ bool ThreadOnLine::OnlineCycle()
 	bool SLD_iCSTROBE_Get = false;  // заглушка на отсутствие лир
 	bool SLD_iLSTROBE_Get = false;
 
+	int crossZoneCounter = 0;
+
 	while (Collect)
 	{
 		Sleep(delay);
@@ -360,7 +362,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 				double p = speedTube * (int)(tick - delayCrossTimeControl);
 
-				if(p > 150)
+				if(p > 300)
 				{
 					crossTimeControl = tick;
 					dprint("delayCrossTimeControl %f\n", p);
@@ -430,6 +432,7 @@ bool ThreadOnLine::OnlineCycle()
 					&Collect, &result);
 				else
 				{
+					 ++crossZoneCounter;
 					BankCross->AddZone(lcard->GetPointCross());
 					lcard->ClearCross();
 					Post(REDRAW, REDRAW_CROSS);
@@ -525,15 +528,18 @@ bool ThreadOnLine::OnlineCycle()
 			}
 			if (!isOutSpeed && prStarted && !SLD->iLCONTROL->Get())
 			{
+				longTimeControl = 0;
+				delayLongTimeControl = 0;
 				isOutSpeed = true;
 				ControlOffTime = CycleTick;
 				TPr::pr("Скорость разгона в конце струбы InSpeed " +
 					String(InSpeed));
 				if (!frConverter->setParameterSpeed
-					(Globals::defaultRotParameter, InSpeed))
-					ErrFinally("Авария: Не удалось включить конечную скорость",
-					&Collect, &result);
+					(Globals::defaultRotParameter, InSpeed));
+				//	ErrFinally("Авария: Не удалось включить конечную скорость",
+				 //	&Collect, &result);
 			}
+			/*
 			if (isOutSpeed && ((CycleTick - ControlOffTime) > 1000))
 			{
 				prIsStoped = true;
@@ -548,7 +554,7 @@ bool ThreadOnLine::OnlineCycle()
 					Post(REDRAW, REDRAW_LINE);
 				}
 				SLD->SetLinearCycle(false);
-				SLD->SetInvA(false);
+			//	SLD->SetInvA(false);
 				if (!frConverter->stopRotation())
 					ErrFinally("Авария: Не удалось выключить вращение",
 					&Collect, &result);
@@ -565,12 +571,20 @@ bool ThreadOnLine::OnlineCycle()
 				SLD->oLSCANPOW->Set(false);
 				pr("Сняли oLSCANPOW");
 			}
+			*/
 		}
 		// -----------------------------------------------------------------------------------------------------------------
 		// смотрим, что труба вышла из установки
 		if (ppStarted && !SLD->iCCONTROL->Get() && (!Linear ||
 			!SLD->iLCONTROL->Get()) && !ToFinish)
 		{
+			BankLine->zones = crossZoneCounter - 1;
+			BankCross->zones = crossZoneCounter - 1;
+			lcard->ClearLine();
+			lcard->ClearCross();
+			Post(REDRAW, REDRAW_LINE);
+			crossTimeControl = 0;
+			delayCrossTimeControl = 0;
 			SetStext2("Труба вышла из установки");
 			Post(UPDATE_STATUS);
 			SLD->oCSOLPOW->Set(false);
@@ -586,7 +600,7 @@ bool ThreadOnLine::OnlineCycle()
 		}
 		if (ToFinish)
 		{
-			if (GetTickCount() - FinishTick > 2000)
+			if (GetTickCount() - FinishTick > 1000)
 			{
 				Finally();
 		   //		if (SLD->iLPCHRUN->Get())
