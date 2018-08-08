@@ -331,16 +331,20 @@ bool ThreadOnLine::OnlineCycle()
 		if(!SQ1TimeControl && SLD->iSQ1->Get())
 		{
 			SQ1TimeControl = tick;
+			dprint("SQ1TimeControl %d\n", SQ1TimeControl);
 		}
 
 		double p = speedTube * (int)(crossTimeControl - tick);
 		if(p > 200)
 		{
 		   crossTimeControl += int((p - 200) / speedTube);
+
+		   if(!SLD_iCSTROBE_Get)dprint("SLD_iCSTROBE_Get ON\n");
 		   SLD_iCSTROBE_Get = true;
 		}
 		else if(p > 100)
 		{
+			if(SLD_iCSTROBE_Get)dprint("SLD_iCSTROBE_Get OFF\n");
 			SLD_iCSTROBE_Get = false;
 		}
 
@@ -348,10 +352,12 @@ bool ThreadOnLine::OnlineCycle()
 		if(p > 200)
 		{
 		   longTimeControl += int((p - 200) / speedTube);
+		   if(!SLD_iLSTROBE_Get)dprint("SLD_iCSTROBE_Get ON\n");
 		   SLD_iLSTROBE_Get = true;
 		}
 		else if(p > 100)
 		{
+			if(SLD_iLSTROBE_Get)dprint("SLD_iCSTROBE_Get OFF\n");
 			SLD_iLSTROBE_Get = false;
 		}
 			// заглушка на отсутствие лир конец

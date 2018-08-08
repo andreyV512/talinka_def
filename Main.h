@@ -153,7 +153,9 @@ private: // User declarations
 	ThreadOnLine *workonline; // тред отрисовки в реальном времени
 
 	// блокировка
+public:
 	void SetAbleButtons(bool state);
+private:
 	// блокировка/разблокировка клавиш
 	void SetProjectSpecialty(); // устанавливает характеристики проекта
 

@@ -473,8 +473,6 @@ object MainForm: TMainForm
     inherited GroupBox1: TGroupBox
       Width = 179
       Height = 74
-      ExplicitLeft = 144
-      ExplicitTop = 2
       ExplicitWidth = 179
       ExplicitHeight = 74
     end

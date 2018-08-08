@@ -76,6 +76,7 @@ void __fastcall TMainForm::FormShow(TObject *Sender)
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
+dprint("APP RUN\n");
 hEvent = CreateEvent(NULL, FALSE, FALSE, NULL);
 	DBS = new CDBS();
 	LoadFormPos(this, ini);
@@ -1011,8 +1012,9 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = state;
 //	ActionManager1->FindItemByCaption("Группа прочности")->Visible = state;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = state;
+	ActionManager1->FindItemByCaption("Выгон трубы")->Visible = state;
  //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
-
+    SetEvent(hEvent);
 	// menuTest->Enabled = state;
 	//
 	// menuTestAdvantech->Enabled = state;
@@ -1117,6 +1119,7 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 			((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
 			frConverter->stopRotation();
 			((TMainForm *)p)->ExitTube->Tag = 0;
+				((TMainForm *)p)->SetAbleButtons(true);
 			return 0;
 		}
 	}
@@ -1126,6 +1129,7 @@ void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
 {
 if(0 == ExitTube->Tag)
 {
+		if(!SLD->iLCONTROL->Get())return;
 		if(!SLD->iCC->Get())
 		{
 		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
@@ -1147,6 +1151,7 @@ if(0 == ExitTube->Tag)
 			Sleep(1000);
 			SLD->oLWORK->Set(true);
 			Sleep(1000);
+			SetAbleButtons(false);
 			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
 		}
 }else
