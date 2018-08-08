@@ -6,6 +6,7 @@
 #include <IniFiles.hpp>
 #include "Global.h"
 #include "SignalListDef.h"
+//#include "A1730.h"
 
 // ------------------------------------------------------------------------------
 
@@ -96,8 +97,9 @@ bool Inverter::startRotation()
 	testThread = new rotationThread(inverter, cs);
 	return true;
 	*/
+	bool b = SLD->oRL->Get() || SLD->oRM->Get() || SLD->oRH->Get();
 	SLD->oSTF->Set(true);
-	return true;
+	return b;
 }
 
 // ------------------------------------------------------------------------------
