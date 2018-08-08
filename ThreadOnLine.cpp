@@ -578,11 +578,14 @@ bool ThreadOnLine::OnlineCycle()
 		if (ppStarted && !SLD->iCCONTROL->Get() && (!Linear ||
 			!SLD->iLCONTROL->Get()) && !ToFinish)
 		{
-			BankLine->zones = crossZoneCounter - 1;
-			BankCross->zones = crossZoneCounter - 1;
+		if(crossZoneCounter > 2)
+		{
+			BankLine->zones = crossZoneCounter - 2;
+			BankCross->zones = crossZoneCounter - 2;
 			lcard->ClearLine();
 			lcard->ClearCross();
 			Post(REDRAW, REDRAW_LINE);
+        }
 			crossTimeControl = 0;
 			delayCrossTimeControl = 0;
 			SetStext2("Труба вышла из установки");
