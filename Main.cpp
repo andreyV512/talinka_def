@@ -1014,7 +1014,7 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Помощь")->Visible = state;
 	//ActionManager1->FindItemByCaption("Выгон трубы")->Visible = state;
  //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
-    SetEvent(hEvent);
+  //  SetEvent(hEvent);
 	// menuTest->Enabled = state;
 	//
 	// menuTestAdvantech->Enabled = state;
@@ -1113,14 +1113,29 @@ DWORD WINAPI TestInputBitCycle3(PVOID p)
 	while(true)
 	{
 		DWORD res = WaitForSingleObject(((TMainForm *)p)->hEvent, 500);
-		if((WAIT_TIMEOUT == res && SLD->iLCONTROL->Get()) || WAIT_OBJECT_0 == res)
+		switch(res)
 		{
-			SLD->oLWORK->Set(false);
-			((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
-			frConverter->stopRotation();
-			((TMainForm *)p)->ExitTube->Tag = 0;
+			case WAIT_TIMEOUT:
+			{
+			   if(!SLD->iLCONTROL->Get())
+			   {
+				SLD->oLWORK->Set(false);
+				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+				frConverter->stopRotation();
+				((TMainForm *)p)->ExitTube->Tag = 0;
 				((TMainForm *)p)->SetAbleButtons(true);
-			return 0;
+				return 0;
+               }
+			}
+			break;
+			case WAIT_OBJECT_0:
+				SLD->oLWORK->Set(false);
+				((TMainForm *)p)->ExitTube->Caption = "Выгон трубы";
+				frConverter->stopRotation();
+				((TMainForm *)p)->ExitTube->Tag = 0;
+				((TMainForm *)p)->SetAbleButtons(true);
+				return 0;
+
 		}
 	}
 }
@@ -1129,7 +1144,8 @@ void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
 {
 if(0 == ExitTube->Tag)
 {
-		if(!SLD->iLCONTROL->Get())return;
+		bool bLongControl = SLD->iLCONTROL->Get();
+		if(!bLongControl)return;
 		if(!SLD->iCC->Get())
 		{
 		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
@@ -1140,7 +1156,8 @@ if(0 == ExitTube->Tag)
 		{
 		StatusBarBottom->Panels->Items[2]->Text = "";
 		StatusBarBottom->Refresh();
-        }
+		}
+
 			AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
 		int speed = ini->ReadInteger(sect, "WorkSpeed", 4);
 		if (frConverter->setParameterSpeed(Globals::defaultRotParameter, speed))
