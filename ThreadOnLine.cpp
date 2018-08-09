@@ -623,7 +623,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 			if (GetTickCount() - FinishTick > 3000)
 			{
-				Finally();
+
 		   //		if (SLD->iLPCHRUN->Get())
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
@@ -633,6 +633,7 @@ bool ThreadOnLine::OnlineCycle()
 				Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
                Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
 			   if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
+			   	Finally();
                }
 				pr("Задержка по выходу завершена");
 			}
