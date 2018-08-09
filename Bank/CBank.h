@@ -11,11 +11,13 @@ class CBank
 private:
 	TCriticalSection* cs;
 	//зона.датчик.измерение
+public:
 	vector<vector<vector<double> > >Source;
 public:
 	unsigned int zones;
 private:
 	unsigned int sensors;
+public:
 	unsigned int last;
 
 public:

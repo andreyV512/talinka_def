@@ -27,7 +27,7 @@ RLCard502::RLCard502(void)
 	LFATAL(a, L502_Open(handle, list[0]));
 	delete[](char*)list;
 	IsStarted = false;
-	RECV_TOUT = 250;
+	RECV_TOUT = 700;
 	MainSensors = 0;
 	OtherSensors = 0;
 }

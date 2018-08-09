@@ -543,10 +543,12 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 //	delete PasswordForm;
 //	if (ini->ReadBool("Default", "IsPasswordOk", false))
 //	{
+/*
 	TAuthorisationForm* AuthorisationForm = new TAuthorisationForm(this,ini);
 	AuthorisationForm->ShowModal();
 	delete AuthorisationForm;
-	if (ini->ReadBool("Default", "IsAuthorisationOk", false))
+	*/
+	if (true)//ini->ReadBool("Default", "IsAuthorisationOk", false))
 	{
 		if (SaveToFileDialog->Execute())
 		{
@@ -1012,6 +1014,7 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = state;
 //	ActionManager1->FindItemByCaption("Группа прочности")->Visible = state;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = state;
+	ExitTube->Enabled = state;
 	//ActionManager1->FindItemByCaption("Выгон трубы")->Visible = state;
  //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
   //  SetEvent(hEvent);
@@ -1144,20 +1147,22 @@ void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
 {
 if(0 == ExitTube->Tag)
 {
-		bool bLongControl = SLD->iLCONTROL->Get();
-		if(!bLongControl)return;
 		if(!SLD->iCC->Get())
 		{
 		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
 		StatusBarBottom->Refresh();
 			  return;
 		}
-		else
+
+		bool bLongControl = SLD->iLCONTROL->Get();
+		if(!bLongControl)
 		{
+			StatusBarBottom->Panels->Items[2]->Text = "Нет сигнала \"КОНТРОЛЬ\"";
+		StatusBarBottom->Refresh();
+			return;
+		}
 		StatusBarBottom->Panels->Items[2]->Text = "";
 		StatusBarBottom->Refresh();
-		}
-
 			AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
 		int speed = ini->ReadInteger(sect, "WorkSpeed", 4);
 		if (frConverter->setParameterSpeed(Globals::defaultRotParameter, speed))
@@ -1165,10 +1170,11 @@ if(0 == ExitTube->Tag)
 			ExitTube->Caption = "СТОП вращения";
 			ExitTube->Tag = 1;
 			frConverter->startRotation();
-			Sleep(1000);
+			SetAbleButtons(false);
+			ExitTube->Enabled = true;
 			SLD->oLWORK->Set(true);
 			Sleep(1000);
-			SetAbleButtons(false);
+
 			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
 		}
 }else

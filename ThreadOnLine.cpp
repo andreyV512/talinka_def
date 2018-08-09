@@ -362,7 +362,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 				double p = speedTube * (int)(tick - delayCrossTimeControl);
 
-				if(p > 300)
+				if(p > 350)
 				{
 					crossTimeControl = tick;
 					dprint("delayCrossTimeControl %f\n", p);
@@ -389,7 +389,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 				double p = speedTube * (int)(tick - delayLongTimeControl);
 
-				if(p > 350)
+				if(p > 400)
 				{
 					longTimeControl = tick;
 					dprint("delayLongTimeControl %f\n", p);
@@ -580,11 +580,18 @@ bool ThreadOnLine::OnlineCycle()
 		{
 		if(crossZoneCounter > 2)
 		{
-			BankLine->zones = crossZoneCounter - 2;
-			BankCross->zones = crossZoneCounter - 2;
+			lcard->StopCross();
+			lcard->StopLine();
+			BankLine->zones = crossZoneCounter - 3;
+			BankCross->zones = crossZoneCounter - 3;
+			BankCross->last = BankCross->zones;
+			BankLine->last = BankLine->zones;
+		  //	BankLine->Source.resize(crossZoneCounter - 4);
+		  //	BankCross->Source.resize(crossZoneCounter - 4);
 			lcard->ClearLine();
 			lcard->ClearCross();
 			Post(REDRAW, REDRAW_LINE);
+			Post(REDRAW, REDRAW_CROSS);
         }
 			crossTimeControl = 0;
 			delayCrossTimeControl = 0;

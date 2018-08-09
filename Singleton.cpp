@@ -2,6 +2,7 @@
 #include "Singleton.h"
 #include "Protocol.h"
 #pragma package(smart_init)
+#include "tools_debug/DebugMess.h"
 // ---------------------------------------------------------------------------
 CSingleton* Singleton = NULL;
 
@@ -44,7 +45,11 @@ void CSingleton::ComputeZonesData()
 	bool xC = CrossResult->zones > 0;
 	bool xT = ThResult->zones > 0;
 
-
+   dprint("long %d cross %d thik %d\n"
+	  , LinearResult->zones
+	, CrossResult->zones
+	, ThResult->zones
+   );
 	SumResult->zones = LinearResult->zones;
 	if(SumResult->zones<CrossResult->zones)
 		SumResult->zones=CrossResult->zones;
