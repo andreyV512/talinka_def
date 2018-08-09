@@ -543,12 +543,10 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 //	delete PasswordForm;
 //	if (ini->ReadBool("Default", "IsPasswordOk", false))
 //	{
-/*
 	TAuthorisationForm* AuthorisationForm = new TAuthorisationForm(this,ini);
 	AuthorisationForm->ShowModal();
 	delete AuthorisationForm;
-	*/
-	if (true)//ini->ReadBool("Default", "IsAuthorisationOk", false))
+	if (ini->ReadBool("Default", "IsAuthorisationOk", false))
 	{
 		if (SaveToFileDialog->Execute())
 		{
@@ -597,14 +595,12 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 // ------------------------------------------------------------------------------
 void __fastcall TMainForm::menuLoadTubeClick(TObject *Sender)
 {
-/*
 	TPasswordForm* PasswordForm = new TPasswordForm(this);
 	PasswordForm->SetIni(ini);
 	PasswordForm->SetUserName("Master");
 	PasswordForm->ShowModal();
 	delete PasswordForm;
-	*/
-	if (true)//ini->ReadBool("Default", "IsPasswordOk", false))
+	if (ini->ReadBool("Default", "IsPasswordOk", false))
 	{
 		if (OpenDialogFromFile->Execute())
 		{
@@ -738,7 +734,8 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 			StatusBarTop->Refresh();
 			StatusBarTop->Panels->Items[2]->Text = " ";
 			{
-				if (cbInterruptView->Checked)
+				if (cbInterruptView->Checked
+				 || cbBrak->Checked && Singleton->SumResult->decision == "Брак")
 					InteruptView();
 				else
 					workonline->SetCalc(Singleton->SumResult->decision == "Брак");
@@ -1016,7 +1013,6 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = state;
 //	ActionManager1->FindItemByCaption("Группа прочности")->Visible = state;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = state;
-	ExitTube->Enabled = state;
 	//ActionManager1->FindItemByCaption("Выгон трубы")->Visible = state;
  //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
   //  SetEvent(hEvent);
@@ -1149,22 +1145,20 @@ void __fastcall TMainForm::ExitTubeClick(TObject *Sender)
 {
 if(0 == ExitTube->Tag)
 {
+		bool bLongControl = SLD->iLCONTROL->Get();
+		if(!bLongControl)return;
 		if(!SLD->iCC->Get())
 		{
 		StatusBarBottom->Panels->Items[2]->Text = "Включите цепи управления";
 		StatusBarBottom->Refresh();
 			  return;
 		}
-
-		bool bLongControl = SLD->iLCONTROL->Get();
-		if(!bLongControl)
+		else
 		{
-			StatusBarBottom->Panels->Items[2]->Text = "Нет сигнала \"КОНТРОЛЬ\"";
-		StatusBarBottom->Refresh();
-			return;
-		}
 		StatusBarBottom->Panels->Items[2]->Text = "";
 		StatusBarBottom->Refresh();
+		}
+
 			AnsiString sect = "Type_" + ini->ReadString("Default", "TypeSize", "1");
 		int speed = ini->ReadInteger(sect, "WorkSpeed", 4);
 		if (frConverter->setParameterSpeed(Globals::defaultRotParameter, speed))
@@ -1172,11 +1166,10 @@ if(0 == ExitTube->Tag)
 			ExitTube->Caption = "СТОП вращения";
 			ExitTube->Tag = 1;
 			frConverter->startRotation();
-			SetAbleButtons(false);
-			ExitTube->Enabled = true;
+			Sleep(1000);
 			SLD->oLWORK->Set(true);
 			Sleep(1000);
-
+			SetAbleButtons(false);
 			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
 		}
 }else

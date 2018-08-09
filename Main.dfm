@@ -182,8 +182,8 @@ object MainForm: TMainForm
     OnKeyPress = FormKeyPress
   end
   object cbInterruptView: TCheckBox
-    Left = 156
-    Top = 129
+    Left = 89
+    Top = 134
     Width = 147
     Height = 17
     Caption = #1055#1088#1077#1088#1099#1074#1072#1085#1080#1077' '#1085#1072' '#1087#1088#1086#1089#1084#1086#1090#1088
@@ -552,6 +552,14 @@ object MainForm: TMainForm
     ParentFont = False
     TabOrder = 18
     OnClick = ExitTubeClick
+  end
+  object cbBrak: TCheckBox
+    Left = 242
+    Top = 134
+    Width = 147
+    Height = 17
+    Caption = #1055#1088#1077#1088#1099#1074#1072#1085#1080#1077' '#1087#1088#1080' '#1073#1088#1072#1082#1077
+    TabOrder = 19
   end
   object SaveToFileDialog: TSaveDialog
     DefaultExt = '.dkb'

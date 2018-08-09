@@ -99,7 +99,8 @@ __published: // IDE-managed Components
 	TLabel *lWinWorkMessage;
 	TTimer *WinWorkTimer;
 	TButton *bWinWorkOk;
-	TButton *ExitTube; // очищает все графики
+	TButton *ExitTube;
+	TCheckBox *cbBrak; // очищает все графики
 
 	void __fastcall MainFormInit(TObject *Sender);
 	// выравнивает объекты на форме, работает в начале работы и при Resize
