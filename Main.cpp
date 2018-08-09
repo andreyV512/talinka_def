@@ -787,6 +787,8 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 	}
 	else if (Msg.message == sms_msg)
 	{
+	if(Singleton->SumResult->zones > Singleton->ThResult->zones)
+	{
 		TPr::pr("Перерисовываем Thick");
 		AnsiString a;
 		a = "MSG Thick: [";
@@ -803,6 +805,7 @@ void __fastcall TMainForm::ApplicationEventsMessage(tagMSG &Msg, bool &Handled)
 		Singleton->ThResult->PutResultOnChart();
 		Singleton->ComputeZonesData();
 		Singleton->SumResult->PutResultOnChart();
+	}
 	}
 }
 

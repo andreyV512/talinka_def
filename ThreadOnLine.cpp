@@ -598,7 +598,7 @@ bool ThreadOnLine::OnlineCycle()
 			*/
 			Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
 			Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
-			if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
+//			if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
 			dprint("xxxxxxxxxxxxxx cr %d\n", crossZoneCounter - rem_zone);
 			lcard->ClearLine();
 			lcard->ClearCross();
@@ -632,7 +632,7 @@ bool ThreadOnLine::OnlineCycle()
 			   {
 				Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
                Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
-			   if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
+			  // if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
 			   	Finally();
                }
 				pr("Задержка по выходу завершена");
@@ -640,7 +640,7 @@ bool ThreadOnLine::OnlineCycle()
 		}
 		// -----------------------------------------------------------------------------------------------------------------
 		// смотрим, не было ли сброса
-		if (Terminated)
+		if (Terminated)                      //
 		{
 			Collect = false;
 			result = false;

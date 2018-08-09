@@ -71,7 +71,7 @@ void CSingleton::ComputeZonesData()
 		if (SumResult->zones > ThResult->zones)
 			SumResult->zones = ThResult->zones;
 	}
-	if(ThResult->zones > SumResult->zones) ThResult->zones = SumResult->zones;
+	//if(ThResult->zones > SumResult->zones) ThResult->zones = SumResult->zones;
 	AnsiString a;
 	a.cat_printf("SumResult->zones=[%d] ", SumResult->zones);
 	TPr::pr(a);
