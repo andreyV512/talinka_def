@@ -580,22 +580,24 @@ bool ThreadOnLine::OnlineCycle()
 		{
 		SLD_iLSTROBE_Get = false;
 		SLD_iCSTROBE_Get = false;
-		if(crossZoneCounter > 3)
+		static const int rem_zone = 4;
+		if(crossZoneCounter > rem_zone)
 		{
 			lcard->StopCross();
 			lcard->StopLine();
-		  //	/*
-			BankLine->zones = crossZoneCounter - 3;
-			BankCross->zones = crossZoneCounter - 3;
+			/*
+			BankLine->zones = crossZoneCounter - rem_zone;
+			BankCross->zones = crossZoneCounter - rem_zone;
 			BankCross->last = BankCross->zones;
 			BankLine->last = BankLine->zones;
-		//	*/
-			lcard->GetPointCross()->resize(crossZoneCounter - 3);
-			lcard->GetPointLine()->resize(crossZoneCounter - 3);
-			BankLine->Source.resize(crossZoneCounter - 3);
-			BankCross->Source.resize(crossZoneCounter - 3);
-			Singleton->LinearResult->zones = crossZoneCounter - 3;
-			Singleton->CrossResult->zones = crossZoneCounter - 3;
+
+			lcard->GetPointCross()->resize(crossZoneCounter - rem_zone);
+			lcard->GetPointLine()->resize(crossZoneCounter - rem_zone);
+			BankLine->Source.resize(crossZoneCounter - rem_zone);
+			BankCross->Source.resize(crossZoneCounter - rem_zone);
+			*/
+			Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
+			Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
 			lcard->ClearLine();
 			lcard->ClearCross();
 			Post(REDRAW, REDRAW_LINE);
