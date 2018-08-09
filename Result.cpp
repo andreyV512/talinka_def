@@ -337,11 +337,12 @@ void Result::FillData(vector<vector<double> >sourceData)
 			for (j = 0; j < sensors_a; j++)
 				for (p = pos * i; p < pos * (i + 1); p++)
 					Source_Data[i][j].push_back(sourceData[j][p]);
-
+   /*
 		// Заполняем последнюю зону
 		for (j = 0; j < sensors_a; j++)
 			for (q = pos * (zones - 1); q < MeasPerSensor; q++)
 				Source_Data[zones - 1][j].push_back(sourceData[j][q]);
+				*/
 	}
 }
 
