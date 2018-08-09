@@ -5,7 +5,7 @@
 #include "l502api.h"
 #pragma comment(lib, "l502api.lib")
 #define LCard502_INIT_SIZE 2000
-#define LCard502_ADD_PERCENT 50
+#define LCard502_ADD_PERCENT 100
 
 // ---------------------------------------------------------------------------
 class RLCard502
