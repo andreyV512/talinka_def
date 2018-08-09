@@ -621,12 +621,19 @@ bool ThreadOnLine::OnlineCycle()
 		}
 		if (ToFinish)
 		{
-			if (GetTickCount() - FinishTick > 1000)
+			if (GetTickCount() - FinishTick > 3000)
 			{
 				Finally();
 		   //		if (SLD->iLPCHRUN->Get())
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
+               static const int rem_zone = 4;
+               if(crossZoneCounter > rem_zone)
+			   {
+				Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
+               Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
+			   if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
+               }
 				pr("Задержка по выходу завершена");
 			}
 		}
