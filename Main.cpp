@@ -597,12 +597,14 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 // ------------------------------------------------------------------------------
 void __fastcall TMainForm::menuLoadTubeClick(TObject *Sender)
 {
+/*
 	TPasswordForm* PasswordForm = new TPasswordForm(this);
 	PasswordForm->SetIni(ini);
 	PasswordForm->SetUserName("Master");
 	PasswordForm->ShowModal();
 	delete PasswordForm;
-	if (ini->ReadBool("Default", "IsPasswordOk", false))
+	*/
+	if (true)//ini->ReadBool("Default", "IsPasswordOk", false))
 	{
 		if (OpenDialogFromFile->Execute())
 		{

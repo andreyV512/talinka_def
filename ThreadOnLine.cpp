@@ -578,7 +578,9 @@ bool ThreadOnLine::OnlineCycle()
 		if (ppStarted && !SLD->iCCONTROL->Get() && (!Linear ||
 			!SLD->iLCONTROL->Get()) && !ToFinish)
 		{
-		if(crossZoneCounter > 2)
+		SLD_iLSTROBE_Get = false;
+		SLD_iCSTROBE_Get = false;
+		if(crossZoneCounter > 3)
 		{
 			lcard->StopCross();
 			lcard->StopLine();
@@ -606,7 +608,6 @@ bool ThreadOnLine::OnlineCycle()
 			// Collect = false;
 			TPr::pr(stext2);
 			pr("Задержка по выходу");
-		  //	Sleep(300);
 		}
 		if (ToFinish)
 		{
