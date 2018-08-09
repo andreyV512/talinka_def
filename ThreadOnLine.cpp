@@ -347,7 +347,7 @@ bool ThreadOnLine::OnlineCycle()
 		//dprint("crossTimeControl %f\n", p);
 			if(p > 200)
 			{
-				crossTimeControl += int((400 - p) / speedTube);
+				crossTimeControl += int((400.0 - p) / speedTube);
 
 		   //		dprint("SLD_iCSTROBE_Get ON\n");
 				SLD_iCSTROBE_Get = true;
@@ -375,7 +375,7 @@ bool ThreadOnLine::OnlineCycle()
 			double p = speedTube * (int)(tick - longTimeControl);
 			if(p > 200)
 			{
-			  longTimeControl += int((400 - p) / speedTube);
+			  longTimeControl += int((400.0 - p) / speedTube);
 			 //  dprint("SLD_iCSTROBE_Get ON\n");
 			 SLD_iLSTROBE_Get = true;
 			}
