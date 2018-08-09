@@ -598,6 +598,8 @@ bool ThreadOnLine::OnlineCycle()
 			*/
 			Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
 			Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
+			if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
+			dprint("xxxxxxxxxxxxxx cr %d\n", crossZoneCounter - rem_zone);
 			lcard->ClearLine();
 			lcard->ClearCross();
 			Post(REDRAW, REDRAW_LINE);
