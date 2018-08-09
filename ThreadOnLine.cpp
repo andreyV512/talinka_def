@@ -592,8 +592,10 @@ bool ThreadOnLine::OnlineCycle()
 		//	*/
 			lcard->GetPointCross()->resize(crossZoneCounter - 3);
 			lcard->GetPointLine()->resize(crossZoneCounter - 3);
-		  //	BankLine->Source.resize(crossZoneCounter - 4);
-		  //	BankCross->Source.resize(crossZoneCounter - 4);
+			BankLine->Source.resize(crossZoneCounter - 3);
+			BankCross->Source.resize(crossZoneCounter - 3);
+			Singleton->LinearResult->zones = crossZoneCounter - 3;
+			Singleton->CrossResult->zones = crossZoneCounter - 3;
 			lcard->ClearLine();
 			lcard->ClearCross();
 			Post(REDRAW, REDRAW_LINE);
