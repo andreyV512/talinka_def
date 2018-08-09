@@ -580,7 +580,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 		SLD_iLSTROBE_Get = false;
 		SLD_iCSTROBE_Get = false;
-		static const int rem_zone = 4;
+		static const int rem_zone = 1;
 		if(crossZoneCounter > rem_zone)
 		{
 			lcard->StopCross();
@@ -604,7 +604,7 @@ bool ThreadOnLine::OnlineCycle()
 			lcard->ClearCross();
 			Post(REDRAW, REDRAW_LINE);
 			Post(REDRAW, REDRAW_CROSS);
-        }
+		}
 			crossTimeControl = 0;
 			delayCrossTimeControl = 0;
 			SetStext2("Труба вышла из установки");
@@ -627,7 +627,7 @@ bool ThreadOnLine::OnlineCycle()
 		   //		if (SLD->iLPCHRUN->Get())
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
-               static const int rem_zone = 4;
+			   static const int rem_zone = 1;
                if(crossZoneCounter > rem_zone)
 			   {
 				Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
