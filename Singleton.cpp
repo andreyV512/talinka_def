@@ -44,12 +44,13 @@ void CSingleton::ComputeZonesData()
 	bool xL = LinearResult->zones > 0;
 	bool xC = CrossResult->zones > 0;
 	bool xT = ThResult->zones > 0;
-
+ /*
    dprint("long %d cross %d thik %d\n"
 	  , LinearResult->zones
 	, CrossResult->zones
 	, ThResult->zones
    );
+   */
 	SumResult->zones = LinearResult->zones;
 	if(SumResult->zones<CrossResult->zones)
 		SumResult->zones=CrossResult->zones;
@@ -70,9 +71,10 @@ void CSingleton::ComputeZonesData()
 		if (SumResult->zones > ThResult->zones)
 			SumResult->zones = ThResult->zones;
 	}
+	if(ThResult->zones > SumResult->zones) ThResult->zones = SumResult->zones;
 	AnsiString a;
 	a.cat_printf("SumResult->zones=[%d] ", SumResult->zones);
-    TPr::pr(a);
+	TPr::pr(a);
 	// 1 - годно, 0 - брак, 2 - 2 класс, 3 - 3 класс...
 	for (int i = 0; i < SumResult->zones; i++)
 	{
