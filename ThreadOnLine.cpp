@@ -584,10 +584,14 @@ bool ThreadOnLine::OnlineCycle()
 		{
 			lcard->StopCross();
 			lcard->StopLine();
+		  //	/*
 			BankLine->zones = crossZoneCounter - 3;
 			BankCross->zones = crossZoneCounter - 3;
 			BankCross->last = BankCross->zones;
 			BankLine->last = BankLine->zones;
+		//	*/
+			lcard->GetPointCross()->resize(crossZoneCounter - 3);
+			lcard->GetPointLine()->resize(crossZoneCounter - 3);
 		  //	BankLine->Source.resize(crossZoneCounter - 4);
 		  //	BankCross->Source.resize(crossZoneCounter - 4);
 			lcard->ClearLine();

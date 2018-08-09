@@ -10,8 +10,10 @@ class LCardData
 {
 private:
 	// датчик.измерение
+	public:
 	vector<vector<double> >LZone;
 	vector<vector<double> >CZone;
+	private:
 	bool IsCrossStarted;
 	bool IsLineStarted;
 	RLCard502* lcard;
