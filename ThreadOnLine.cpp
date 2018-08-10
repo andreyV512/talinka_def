@@ -627,7 +627,7 @@ bool ThreadOnLine::OnlineCycle()
 		   //		if (SLD->iLPCHRUN->Get())
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
-			   static const int rem_zone = 1;
+			   static const int rem_zone = 0;
                if(crossZoneCounter > rem_zone)
 			   {
 				Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
