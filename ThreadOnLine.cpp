@@ -575,13 +575,13 @@ bool ThreadOnLine::OnlineCycle()
 			*/
 		}
 		// -----------------------------------------------------------------------------------------------------------------
+		static const int rem_zone = 1;
 		// смотрим, что труба вышла из установки
 		if (ppStarted && !SLD->iCCONTROL->Get() && (!Linear ||
 			!SLD->iLCONTROL->Get()) && !ToFinish)
 		{
 		SLD_iLSTROBE_Get = false;
 		SLD_iCSTROBE_Get = false;
-		static const int rem_zone = 0;
 		if(crossZoneCounter > rem_zone)
 		{
 			lcard->StopCross();
@@ -629,7 +629,7 @@ bool ThreadOnLine::OnlineCycle()
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
 
-			   static const int rem_zone = 0;
+			   //static const int rem_zone = 0;
 			   if(crossZoneCounter > rem_zone)
 			   {
 				if(Singleton->LinearResult->zones)Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
