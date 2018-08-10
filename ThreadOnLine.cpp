@@ -575,7 +575,7 @@ bool ThreadOnLine::OnlineCycle()
 			*/
 		}
 		// -----------------------------------------------------------------------------------------------------------------
-		static const int rem_zone = 1;
+		static const int rem_zone = 0;
 		// смотрим, что труба вышла из установки
 		if (ppStarted && !SLD->iCCONTROL->Get() && (!Linear ||
 			!SLD->iLCONTROL->Get()) && !ToFinish)

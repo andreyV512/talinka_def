@@ -1006,6 +1006,7 @@ void TMainForm::SetAbleButtons(bool state)
 	bWork->Enabled = state;
 	bManage->Enabled = state;
 	bCancelWork->Enabled = state;
+	ExitTube->Enabled = state;
 
 	FRCross1->SetEnabledR(state);
 	FRThick1->SetEnabledR(state);
@@ -1173,6 +1174,7 @@ if(0 == ExitTube->Tag)
 			SLD->oLWORK->Set(true);
 			Sleep(1000);
 			SetAbleButtons(false);
+			ExitTube->Enabled = true;
 			CloseHandle(CreateThread(NULL, 0, TestInputBitCycle3, this, 0, NULL));
 		}
 }else
