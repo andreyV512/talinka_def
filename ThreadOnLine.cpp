@@ -609,7 +609,7 @@ bool ThreadOnLine::OnlineCycle()
 			delayCrossTimeControl = 0;
 			SetStext2("Труба вышла из установки");
 			Post(UPDATE_STATUS);
-			SLD->oCSOLPOW->Set(false);
+
 		  //	SLD->oLSOLPOW->Set(false);
 			SLD->oLSCANPOW->Set(false);
 			ToFinish = true;
@@ -621,9 +621,9 @@ bool ThreadOnLine::OnlineCycle()
 		}
 		if (ToFinish)
 		{
-			if (GetTickCount() - FinishTick > 3000)
+			if (GetTickCount() - FinishTick > 2000)
 			{
-
+					   SLD->oCSOLPOW->Set(false);
 		   //		if (SLD->iLPCHRUN->Get())
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
