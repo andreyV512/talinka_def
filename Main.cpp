@@ -947,7 +947,7 @@ void TMainForm::InteruptView(void)
 	ActionManager1->FindItemByCaption("Труба")->Visible = true;
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = true;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = true;
-	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = true;
+   //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = true;
 }
 
 void TMainForm::InteruptSG(void)
