@@ -344,17 +344,17 @@ bool ThreadOnLine::OnlineCycle()
 		if(crossTimeControl > 0)
 		{
 		double p = speedTube * (int)(tick - crossTimeControl);
-		//dprint("crossTimeControl %f\n", p);
+		dprint("crossTimeControl %f\n", p);
 			if(p > 200)
 			{
 				crossTimeControl += int((400.0 - p) / speedTube);
 
-		   //		dprint("SLD_iCSTROBE_Get ON\n");
+				dprint("SLD_iCSTROBE_Get ON\n");
 				SLD_iCSTROBE_Get = true;
 			}
 			else if(p > 100)
 			{
-			//	dprint("SLD_iCSTROBE_Get OFF\n");
+				dprint("SLD_iCSTROBE_Get OFF\n");
 				SLD_iCSTROBE_Get = false;
 			}
 		}
@@ -373,15 +373,16 @@ bool ThreadOnLine::OnlineCycle()
 		if(longTimeControl > 0)
 		{
 			double p = speedTube * (int)(tick - longTimeControl);
+				dprint("longTimeControl %f\n", p);
 			if(p > 200)
 			{
 			  longTimeControl += int((400.0 - p) / speedTube);
-			 //  dprint("SLD_iCSTROBE_Get ON\n");
+			   dprint("SLD_iLSTROBE_Get ON\n");
 			 SLD_iLSTROBE_Get = true;
 			}
 			else if(p > 100)
 			{
-	   //		dprint("SLD_iCSTROBE_Get OFF\n");
+			dprint("SLD_iLSTROBE_Get OFF\n");
 				SLD_iLSTROBE_Get = false;
 			}
 		}
@@ -580,7 +581,7 @@ bool ThreadOnLine::OnlineCycle()
 		{
 		SLD_iLSTROBE_Get = false;
 		SLD_iCSTROBE_Get = false;
-		static const int rem_zone = 1;
+		static const int rem_zone = 0;
 		if(crossZoneCounter > rem_zone)
 		{
 			lcard->StopCross();
@@ -596,7 +597,7 @@ bool ThreadOnLine::OnlineCycle()
 			BankLine->Source.resize(crossZoneCounter - rem_zone);
 			BankCross->Source.resize(crossZoneCounter - rem_zone);
 			*/
-			Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
+			if(Singleton->LinearResult->zones)Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
 			Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
 //			if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
 			dprint("xxxxxxxxxxxxxx cr %d\n", crossZoneCounter - rem_zone);
@@ -627,14 +628,17 @@ bool ThreadOnLine::OnlineCycle()
 		   //		if (SLD->iLPCHRUN->Get())
 			  //		SLD->oLPCHPOW->Set(false);
 				Collect = false;
+
 			   static const int rem_zone = 0;
-               if(crossZoneCounter > rem_zone)
+			   if(crossZoneCounter > rem_zone)
 			   {
-				Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
-               Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
+				if(Singleton->LinearResult->zones)Singleton->LinearResult->zones = crossZoneCounter - rem_zone;
+				Singleton->CrossResult->zones = crossZoneCounter - rem_zone;
+			}
+
 			  // if(Singleton->ThResult->zones)Singleton->ThResult->zones = crossZoneCounter - rem_zone;
-			   	Finally();
-               }
+				Finally();
+			   //}
 				pr("Задержка по выходу завершена");
 			}
 		}
