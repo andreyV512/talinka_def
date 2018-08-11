@@ -15,7 +15,7 @@ CSingleton::CSingleton(TIniFile* _ini, TComponent* _Owner)
 	if (!_ini->ValueExists(sect, "LineSensors"))
 		_ini->WriteString(sect, "LineSensors", "4");
 
-	int LSensors=_ini->ReadInteger(sect,"LineSensors",4);
+	int LSensors= 4;//_ini->ReadInteger(sect,"LineSensors",4);
 	int CSensors=12;//ўукин 20151201 //_ini->ReadInteger(sect,"CrossSensors",12);
 
 	CrossResult = new CCrossResult(CSensors, _ini, _Owner);
@@ -28,7 +28,7 @@ CSingleton::CSingleton(TIniFile* _ini, TComponent* _Owner)
 	FromFile=false;
 	isSOP=false;
 	solidGroupSwitch = _ini->ReadInteger(sect, "solidGroupSwitch", 1);
-	defaultSolidGroup = _ini->ReadString(sect, "defaultSolidGroup", "K")[0];
+	defaultSolidGroup = _ini->ReadString(sect, "defaultSolidGroup", "K").c_str()[0];
 	AnsiString addr = _ini->ReadString("Default", "SortoScopeAddr", "192.168.0.10");
 	AnsiString path = ExtractFilePath(Application->ExeName) + "../../Settings/SortoScopeDLL.dll";
 	solidGroup = new SolidGroup;

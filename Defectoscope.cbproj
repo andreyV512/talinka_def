@@ -290,9 +290,6 @@
 				<IgnorePath>true</IgnorePath>
 				<BuildOrder>87</BuildOrder>
 			</LibFiles>
-			<CppCompile Include="LCard502\lib\borland\x.cpp">
-				<BuildOrder>88</BuildOrder>
-			</CppCompile>
 			<CppCompile Include="LCard502\RChannel_parameters.cpp">
 				<DependentOn>LCard502\RChannel_parameters.h</DependentOn>
 				<BuildOrder>78</BuildOrder>

@@ -30,7 +30,7 @@ void __fastcall TSolidGroupOptionsForm::cbSolidGroupSwitchClick(TObject *Sender)
 	 _ini->WriteInteger(sect, "solidGroupSwitch", Singleton->solidGroupSwitch);
 	 if(!Singleton->solidGroupSwitch)
 	 {
-		  Singleton->defaultSolidGroup = _ini->ReadString(sect, "defaultSolidGroup", "K")[0];
+		  Singleton->defaultSolidGroup = _ini->ReadString(sect, "defaultSolidGroup", "K").c_str()[0];
 	 }
 	 delete _ini;
 }
@@ -44,3 +44,4 @@ void __fastcall TSolidGroupOptionsForm::cboxSelectGroupChange(TObject *Sender)
 	 delete _ini;
 }
 //---------------------------------------------------------------------------
+

@@ -74,6 +74,7 @@ void TFRCross::LoadSettings(void)
 	int lsensors_a = ini->ReadInteger(sect, "CrossSensors", 100);
 	for (int i = 0; i < Chart1->SeriesCount(); i++)
 		Chart1->Series[i]->Visible = i < lsensors_a;
+	Chart1->LeftAxis->Minimum = 0;
 	Chart1->LeftAxis->Maximum = lsensors_a;
 }
 

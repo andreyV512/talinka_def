@@ -4,6 +4,7 @@
 #pragma package(smart_init)
 #include <cmath.h>
 #include <stdlib.h>
+#include "tools_debug/DebugMess.h"
 
 LCardData* lcard=NULL;
 // ---------------------------------------------------------------------------
@@ -119,6 +120,7 @@ bool LCardData::Read(void)
 	}
 	if (IsLineStarted)
 	{
+		dprint("line\n");
 		unsigned int size_new = LZone[0].size() + packets;
 		if (LZone[0].capacity() < size_new)
 		{
