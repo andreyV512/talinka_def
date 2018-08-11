@@ -44,6 +44,7 @@ USEFORM("EtalonNewDefect.cpp", EtalonNewDefectForm);
 USEFORM("EtalonDefectNew.cpp", EtalonDefectNewForm);
 USEFORM("EtalonCheckJournal.cpp", EtalonCheckJournalForm);
 USEFORM("EtalonDefect.cpp", EtalonDefectForm);
+USEFORM("SolidGroupOptions.cpp", SolidGroupOptionsForm);
 //---------------------------------------------------------------------------
 WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 {
@@ -74,6 +75,7 @@ WINAPI _tWinMain(HINSTANCE, HINSTANCE, LPTSTR, int)
 		Application->CreateForm(__classid(TFormColor), &FormColor);
 		Application->CreateForm(__classid(TADCSettForm), &ADCSettForm);
 		Application->CreateForm(__classid(TAboutBox1), &AboutBox1);
+		Application->CreateForm(__classid(TSolidGroupOptionsForm), &SolidGroupOptionsForm);
 		Application->Run();
 
 		// Приложение закрывается ,
