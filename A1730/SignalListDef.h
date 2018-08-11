@@ -31,6 +31,7 @@ public:
 	CSignal* iLCONTROL; // 12=прод контроль
    //	CSignal* iSOP; // Татарстан: Режим СОП
 	CSignal* iSQ1;
+	CSignal* iSolidGroup;
 
 	// Card0_OUT_Digital]
    //	CSignal* oLPCHPOW; // 0=Прод Пит ПЧ
