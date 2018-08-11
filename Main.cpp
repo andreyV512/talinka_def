@@ -866,6 +866,16 @@ void TMainForm::ReDraw(void)
 	if (!isView)
 		return;
 
+	if(Singleton->CrossResult->zones <  Singleton->ThResult->zones)
+	{
+		Singleton->ThResult->zones = Singleton->CrossResult->zones;
+	}
+
+	if(Singleton->CrossResult->zones <  Singleton->LinearResult->zones)
+	{
+		Singleton->LinearResult->zones = Singleton->CrossResult->zones;
+	}
+
 	Singleton->CrossResult->ComputeZoneData();
 	Singleton->CrossResult->PutResultOnChart();
 
@@ -1101,8 +1111,6 @@ void __fastcall TMainForm::WinWorkTimerTimer(TObject *Sender)
 		lWinWorkMessage->Top = WinWorkPanel->Height/2 - lWinWorkMessage->Height;
 		bWinWorkOk->Left = (WinWorkPanel->Width - bWinWorkOk->Width)/2;
 		bWinWorkOk->Top = WinWorkPanel->Height/2 + 50;
-		//WinWorkPanel->BringToFront();//todo
-		//WinWorkPanel->Visible = true;//todo
 	}
 }
 //---------------------------------------------------------------------------
