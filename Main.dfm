@@ -213,16 +213,18 @@ object MainForm: TMainForm
         DepthAxis.Automatic = False
         DepthAxis.AutomaticMaximum = False
         DepthAxis.AutomaticMinimum = False
-        DepthAxis.Maximum = 2.809999999999996000
-        DepthAxis.Minimum = 1.809999999999999000
+        DepthAxis.Maximum = 4.459999999999992000
+        DepthAxis.Minimum = 3.459999999999991000
         DepthTopAxis.Automatic = False
         DepthTopAxis.AutomaticMaximum = False
         DepthTopAxis.AutomaticMinimum = False
-        DepthTopAxis.Maximum = 2.809999999999996000
-        DepthTopAxis.Minimum = 1.809999999999999000
+        DepthTopAxis.Maximum = 4.459999999999992000
+        DepthTopAxis.Minimum = 3.459999999999991000
         LeftAxis.ExactDateTime = False
         LeftAxis.Increment = 5.000000000000000000
         LeftAxis.LabelsSeparation = 0
+        LeftAxis.Maximum = 31.799999999999970000
+        LeftAxis.Minimum = 19.799999999999980000
         LeftAxis.MinorTicks.Visible = False
         RightAxis.Automatic = False
         RightAxis.AutomaticMaximum = False
@@ -424,11 +426,6 @@ object MainForm: TMainForm
         BottomAxis.LabelsSeparation = 0
         LeftAxis.Labels = False
         ExplicitHeight = 83
-      end
-      inherited Panel1: TPanel
-        inherited pSolidGroup: TPanel
-          Visible = False
-        end
       end
     end
   end
@@ -653,11 +650,11 @@ object MainForm: TMainForm
           item
             Items = <
               item
+                Visible = False
                 Action = Action17
                 Caption = #1043#1088#1072#1092#1080#1082#1080' '#1043#1055
               end>
-            Visible = False
-            Caption = #1043#1088#1091#1087#1087#1072' '#1087#1088#1086#1095#1085#1086#1089#1090#1080
+            Action = Action26
           end
           item
             Items = <
@@ -784,6 +781,9 @@ object MainForm: TMainForm
     object Action25: TAction
       Caption = 'Action25'
       OnExecute = Action25Execute
+    end
+    object Action26: TAction
+      Caption = #1043#1088#1091#1087#1087#1072' '#1087#1088#1086#1095#1085#1086#1089#1090#1080
     end
   end
   object WinWorkTimer: TTimer

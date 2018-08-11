@@ -31,6 +31,7 @@ void TFRSum::Clear(void)
 	for (int i = 0; i < Chart1->SeriesCount(); i++)
 		Chart1->Series[i]->Clear();
 	lResult->Caption = "";
+	pSolidGroup->Caption = "";
 	lResult->Color = clBtnFace;
 	lCut1->Caption = "";
 	lCut2->Caption = "";

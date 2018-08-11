@@ -27,6 +27,13 @@ CSingleton::CSingleton(TIniFile* _ini, TComponent* _Owner)
 	SumResult = new SummaryResult(max_sensors, _ini);
 	FromFile=false;
 	isSOP=false;
+	solidGroupSwitch = _ini->ReadInteger(sect, "solidGroupSwitch", 1);
+	defaultSolidGroup = _ini->ReadString(sect, "defaultSolidGroup", "K")[0];
+	AnsiString addr = _ini->ReadString("Default", "SortoScopeAddr", "192.168.0.10");
+	AnsiString path = ExtractFilePath(Application->ExeName) + "../../Settings/SortoScopeDLL.dll";
+	solidGroup = new SolidGroup;
+	solidGroup->Init(path.c_str());
+	solidGroup->SetAddr(addr.c_str());
 }
 
 // ---------------------------------------------------------------------------
@@ -36,6 +43,7 @@ CSingleton::~CSingleton()
 	delete LinearResult;
 	delete ThResult;
 	delete SumResult;
+	delete solidGroup;
 }
 
 // ---------------------------------------------------------------------------

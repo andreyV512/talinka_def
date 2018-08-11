@@ -34,6 +34,7 @@
 #include "TSChangeWarning.h"
 
 #include "tools_debug/DebugMess.h"
+
 // ---------------------------------------------------------------------------
 #pragma package(smart_init)
 
@@ -893,6 +894,8 @@ void TMainForm::ReDraw(void)
 	FRThick1->SetMinThick(Singleton->ThResult->MinThick
 		(Singleton->SumResult->cut1, Singleton->SumResult->cut2));
 
+	FRSum->pSolidGroup->Caption = Singleton->currentSolidGroup;
+
 	TColor lcolor;
 	if (Singleton->SumResult->decision == "Брак")
 		lcolor = clRed;
@@ -1191,6 +1194,7 @@ if(0 == ExitTube->Tag)
 	dprint("Event\n");
 }
 }
+
 
 
 

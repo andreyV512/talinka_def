@@ -40,8 +40,8 @@
 			<VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=1.0.0.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
 			<DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
 			<VerInfo_Locale>1049</VerInfo_Locale>
-			<ILINK_LibraryPath>LCard502\lib\borland\;LCard502\include\;tools_debug\;LCard502\;SoligGroup\;DBS\;Meases\;Bank\;A1730\;MitCOME\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
-			<IncludePath>LCard502\lib\borland\;LCard502\include\;tools_debug\;LCard502\;SoligGroup\;DBS\;Meases\;Bank\;A1730\;MitCOME\;$(IncludePath)</IncludePath>
+			<ILINK_LibraryPath>SortoScope\;LCard502\lib\borland\;LCard502\include\;tools_debug\;LCard502\;SoligGroup\;DBS\;Meases\;Bank\;A1730\;MitCOME\;$(ILINK_LibraryPath)</ILINK_LibraryPath>
+			<IncludePath>SortoScope\;LCard502\lib\borland\;LCard502\include\;tools_debug\;LCard502\;SoligGroup\;DBS\;Meases\;Bank\;A1730\;MitCOME\;$(IncludePath)</IncludePath>
 			<LinkPackageStatics>rtl.lib;vcl.lib;Tee.lib;vclimg.lib;dbrtl.lib;adortl.lib;vclactnband.lib;vclx.lib;vcldb.lib;bcbsmp.lib;inet.lib;dsnap.lib;dsnapcon.lib;xmlrtl.lib</LinkPackageStatics>
 			<OutputExt>exe</OutputExt>
 			<PackageImports>rtl.bpi;vcl.bpi;bcbie.bpi;xmlrtl.bpi;vclactnband.bpi;vclx.bpi;bcbsmp.bpi;VclSmp.bpi;vclimg.bpi;svnui.bpi;svn.bpi;bdertl.bpi;TeeUI.bpi;TeeDB.bpi;Tee.bpi;vcldb.bpi;dbrtl.bpi;vcldbx.bpi;vcltouch.bpi;dsnap.bpi;dsnapcon.bpi;vclib.bpi;ibxpress.bpi;adortl.bpi;IndyCore.bpi;IndySystem.bpi;IndyProtocols.bpi;inet.bpi;intrawebdb_110_150.bpi;Intraweb_110_150.bpi;vclie.bpi;websnap.bpi;webdsnap.bpi;inetdb.bpi;inetdbbde.bpi;inetdbxpress.bpi;soaprtl.bpi;vclribbon.bpi;dbexpress.bpi;DbxCommonDriver.bpi;DataSnapIndy10ServerTransport.bpi;DataSnapProviderClient.bpi;DbxClientDriver.bpi;DataSnapClient.bpi;dbxcds.bpi;DataSnapServer.bpi;AzureCloud.bpi;DBXInterBaseDriver.bpi;DBXMySQLDriver.bpi;DBXFirebirdDriver.bpi;DBXSybaseASEDriver.bpi;DBXSybaseASADriver.bpi;DBXOracleDriver.bpi;DBXMSSQLDriver.bpi;DBXInformixDriver.bpi;DBXDb2Driver.bpi;CodeSiteExpressVcl.bpi;Comm.bpi;$(PackageImports).bpi</PackageImports>
@@ -394,6 +394,20 @@
 				<DependentOn>Solenoid.h</DependentOn>
 				<BuildOrder>45</BuildOrder>
 			</CppCompile>
+			<CppCompile Include="SolidGroupOptions.cpp">
+				<Form>SolidGroupOptionsForm</Form>
+				<DependentOn>SolidGroupOptions.h</DependentOn>
+				<BuildOrder>89</BuildOrder>
+			</CppCompile>
+			<CppCompile Include="SortoScope\Solid.cpp">
+				<BuildOrder>93</BuildOrder>
+			</CppCompile>
+			<None Include="SortoScope\Solid.h">
+				<BuildOrder>94</BuildOrder>
+			</None>
+			<None Include="SortoScope\SortoScopeDLL.h">
+				<BuildOrder>92</BuildOrder>
+			</None>
 			<CppCompile Include="SummaryResult.cpp">
 				<DependentOn>SummaryResult.h</DependentOn>
 				<BuildOrder>54</BuildOrder>
@@ -512,11 +526,10 @@
 				<DependentOn>View.h</DependentOn>
 				<BuildOrder>5</BuildOrder>
 			</CppCompile>
+			<FormResources Include="Settings.dfm"/>
+			<FormResources Include="SolidGroupOptions.dfm"/>
 			<FormResources Include="NewDefectoscoper.dfm"/>
 			<FormResources Include="Password.dfm"/>
-			<FormResources Include="Settings.dfm"/>
-			<FormResources Include="Main.dfm"/>
-			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="uTFRCross.dfm"/>
 			<FormResources Include="uTFRDeads.dfm"/>
 			<FormResources Include="uTFRBorders.dfm"/>
@@ -528,28 +541,30 @@
 			<FormResources Include="uTFRSum.dfm"/>
 			<FormResources Include="uTFRSensor.dfm"/>
 			<FormResources Include="uTFRSOP.dfm"/>
-			<FormResources Include="TSChangeWarning.dfm"/>
-			<FormResources Include="uFRStatist.dfm"/>
-			<FormResources Include="uFViewZoneS.dfm"/>
 			<FormResources Include="uTFilterSettings.dfm"/>
+			<FormResources Include="TSChangeWarning.dfm"/>
 			<FormResources Include="uFViewZoneD.dfm"/>
+			<FormResources Include="uFViewZoneS.dfm"/>
+			<FormResources Include="uFRStatist.dfm"/>
 			<FormResources Include="uFRViewZone.dfm"/>
-			<FormResources Include="ChangePassword.dfm"/>
-			<FormResources Include="ADCSettings.dfm"/>
-			<FormResources Include="Authorisation.dfm"/>
+			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="ColorSettings.dfm"/>
+			<FormResources Include="ChangePassword.dfm"/>
+			<FormResources Include="Authorisation.dfm"/>
+			<FormResources Include="ADCSettings.dfm"/>
 			<FormResources Include="A1730\uFSignalsState.dfm"/>
 			<FormResources Include="ABOUT_NTC_NK_URAN.dfm"/>
 			<FormResources Include="A1730\uFRSigPanel.dfm"/>
-			<FormResources Include="EtalonTubeDefects.dfm"/>
+			<FormResources Include="Main.dfm"/>
 			<FormResources Include="EtalonTubeDefectsNew.dfm"/>
 			<FormResources Include="Defectoscopers.dfm"/>
 			<FormResources Include="EtalonBorderSet.dfm"/>
-			<FormResources Include="EtalonDefectsCheck.dfm"/>
-			<FormResources Include="EtalonNewDefect.dfm"/>
-			<FormResources Include="EtalonDefectNew.dfm"/>
 			<FormResources Include="EtalonCheckJournal.dfm"/>
+			<FormResources Include="EtalonNewDefect.dfm"/>
+			<FormResources Include="EtalonTubeDefects.dfm"/>
+			<FormResources Include="EtalonDefectsCheck.dfm"/>
 			<FormResources Include="EtalonDefect.dfm"/>
+			<FormResources Include="EtalonDefectNew.dfm"/>
 			<BuildConfiguration Include="Release">
 				<Key>Cfg_2</Key>
 				<CfgParent>Base</CfgParent>

@@ -100,7 +100,8 @@ __published: // IDE-managed Components
 	TTimer *WinWorkTimer;
 	TButton *bWinWorkOk;
 	TButton *ExitTube;
-	TCheckBox *cbBrak; // очищает все графики
+	TCheckBox *cbBrak;
+	TAction *Action26; // очищает все графики
 
 	void __fastcall MainFormInit(TObject *Sender);
 	// выравнивает объекты на форме, работает в начале работы и при Resize
@@ -204,7 +205,7 @@ private:
 	int MuchWinWorkTime;
 
 public: // User declarations
-       HANDLE hEvent;
+	   HANDLE hEvent;
 	__fastcall TMainForm(TComponent* Owner);
 };
 

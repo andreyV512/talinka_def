@@ -83,7 +83,7 @@ void SaveTubeToDB(TIniFile* _ini)
 	SQL += "','";
 	SQL += Singleton->SumResult->decision;
 	SQL += "','";
-	SQL += "?";
+	SQL += Singleton->currentSolidGroup;//"?"; //todo вставить Группу прочности
 	SQL += "',";
 	AnsiString ss;
 	double minThick = Singleton->ThResult->MinThick(Singleton->SumResult->cut1

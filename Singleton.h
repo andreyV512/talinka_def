@@ -4,6 +4,7 @@
 #include "CrossResult.h"
 #include "ThicknessResult.h"
 #include "SummaryResult.h"
+#include "SortoScope/Solid.h"
 
 class CSingleton
 {
@@ -22,6 +23,11 @@ public:
 	ThicknessResult *ThResult;
 	// ! Сумарный результат
 	SummaryResult *SumResult;
+
+	bool solidGroupSwitch;
+	char currentSolidGroup;
+	char defaultSolidGroup;
+	SolidGroup *solidGroup;
 
 	// ! Считает суммарный результат по всем модулям, заполянет массив zone_data
 	void ComputeZonesData();

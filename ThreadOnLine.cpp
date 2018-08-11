@@ -135,6 +135,16 @@ void __fastcall ThreadOnLine::UpdateStatusBarBottom()
 // -----подготовка к работе от самого начала до движения трубы----------------
 UnicodeString ThreadOnLine::PrepareForWork()
 {
+	if(Singleton->currentSolidGroup)
+	{
+		int res = Singleton->solidGroup->Get();
+		if(res < 0)
+		{
+			 char *a = "Тест связи с сортоскопом не пройден";
+			TPr::pr(a);
+			return a;
+        }
+    }
 	double t = 0;
 	if(!CrossSolenoid->Solenoid1U(t))
 	{
@@ -620,8 +630,13 @@ bool ThreadOnLine::OnlineCycle()
 			TPr::pr(stext2);
 			pr("Задержка по выходу");
 		}
-		if (ToFinish)
+		if (ToFinish && (!Singleton->solidGroupSwitch || SLD->iSolidGroup->Get()))
 		{
+			if(Singleton->solidGroupSwitch)
+			{
+				Singleton->currentSolidGroup = Singleton->solidGroup->Get();
+				if(Singleton->currentSolidGroup < 0) Singleton->currentSolidGroup = Singleton->defaultSolidGroup;
+			}
 			if (GetTickCount() - FinishTick > 2000)
 			{
 					   SLD->oCSOLPOW->Set(false);
