@@ -354,17 +354,17 @@ bool ThreadOnLine::OnlineCycle()
 		if(crossTimeControl > 0)
 		{
 		double p = speedTube * (int)(tick - crossTimeControl);
-		dprint("crossTimeControl %f\n", p);
+	 //	dprint("crossTimeControl %f\n", p);
 			if(p > 200)
 			{
 				crossTimeControl += int((400.0 - p) / speedTube);
 
-				dprint("SLD_iCSTROBE_Get ON\n");
+			 //	dprint("SLD_iCSTROBE_Get ON\n");
 				SLD_iCSTROBE_Get = true;
 			}
 			else if(p > 100)
 			{
-				dprint("SLD_iCSTROBE_Get OFF\n");
+			 //	dprint("SLD_iCSTROBE_Get OFF\n");
 				SLD_iCSTROBE_Get = false;
 			}
 		}
@@ -383,16 +383,16 @@ bool ThreadOnLine::OnlineCycle()
 		if(longTimeControl > 0)
 		{
 			double p = speedTube * (int)(tick - longTimeControl);
-				dprint("longTimeControl %f\n", p);
+			 //	dprint("longTimeControl %f\n", p);
 			if(p > 200)
 			{
 			  longTimeControl += int((400.0 - p) / speedTube);
-			   dprint("SLD_iLSTROBE_Get ON\n");
+			//   dprint("SLD_iLSTROBE_Get ON\n");
 			 SLD_iLSTROBE_Get = true;
 			}
 			else if(p > 100)
 			{
-			dprint("SLD_iLSTROBE_Get OFF\n");
+		   //	dprint("SLD_iLSTROBE_Get OFF\n");
 				SLD_iLSTROBE_Get = false;
 			}
 		}

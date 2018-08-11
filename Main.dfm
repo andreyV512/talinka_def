@@ -650,9 +650,8 @@ object MainForm: TMainForm
           item
             Items = <
               item
-                Visible = False
                 Action = Action17
-                Caption = #1043#1088#1072#1092#1080#1082#1080' '#1043#1055
+                Caption = #1043#1088#1091#1087#1087#1072' '#1087#1088#1086#1095#1085#1086#1089#1090#1080
               end>
             Action = Action26
           end
@@ -747,6 +746,7 @@ object MainForm: TMainForm
     end
     object Action17: TAction
       Caption = 'Action17'
+      OnExecute = SolidGroupOptions
     end
     object Action18: TAction
       Caption = 'Action18'

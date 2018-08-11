@@ -32,6 +32,7 @@
 #include "Password.h"
 #include "Save.h"
 #include "TSChangeWarning.h"
+#include "SolidGroupOptions.h"
 
 #include "tools_debug/DebugMess.h"
 
@@ -960,6 +961,7 @@ void TMainForm::InteruptView(void)
 	ActionManager1->FindItemByCaption("Труба")->Visible = true;
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = true;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = true;
+	ActionManager1->FindItemByCaption("Группа прочности")->Visible = true;
    //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = true;
 }
 
@@ -976,7 +978,7 @@ void TMainForm::InteruptSG(void)
 	bWork->Enabled = true;
 	bWork->Caption = "Продолжить";
 	bView->Enabled = true;
-	ActionManager1->FindItemByCaption("Группа прочности")->Visible = true;
+	//ActionManager1->FindItemByCaption("Группа прочности")->Visible = true;
 }
 
 // ---------------------------------------------------------------------------
@@ -1028,7 +1030,7 @@ void TMainForm::SetAbleButtons(bool state)
 	ActionManager1->FindItemByCaption("Настройка")->Visible = state;
 	ActionManager1->FindItemByCaption("Труба")->Visible = state;
 	ActionManager1->FindItemByCaption("Диагностика")->Visible = state;
-//	ActionManager1->FindItemByCaption("Группа прочности")->Visible = state;
+	ActionManager1->FindItemByCaption("Группа прочности")->Visible = state;
 	ActionManager1->FindItemByCaption("Помощь")->Visible = state;
 	//ActionManager1->FindItemByCaption("Выгон трубы")->Visible = state;
  //	ActionManager1->FindItemByCaption("Контроль СОП")->Visible = state;
@@ -1195,9 +1197,9 @@ if(0 == ExitTube->Tag)
 }
 }
 
-
-
-
-
-
+void __fastcall TMainForm::SolidGroupOptions(TObject *Sender)
+{
+   SolidGroupOptionsForm->ShowModal();
+}
+//---------------------------------------------------------------------------
 

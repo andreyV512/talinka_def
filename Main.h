@@ -139,6 +139,7 @@ __published: // IDE-managed Components
 	void __fastcall WinWorkTimerTimer(TObject *Sender);
 	void __fastcall bWinWorkOkClick(TObject *Sender);
 	void __fastcall ExitTubeClick(TObject *Sender);
+	void __fastcall SolidGroupOptions(TObject *Sender);
 
 private: // User declarations
 

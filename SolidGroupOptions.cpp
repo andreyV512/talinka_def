@@ -19,7 +19,10 @@ __fastcall TSolidGroupOptionsForm::TSolidGroupOptionsForm(TComponent* Owner)
 void __fastcall TSolidGroupOptionsForm::FormActivate(TObject *Sender)
 {
 	cbSolidGroupSwitch->Checked = Singleton->solidGroupSwitch;
-	cboxSelectGroup->Text = Singleton->currentSolidGroup;
+   //	cboxSelectGroup->Text = Singleton->currentSolidGroup;
+   //	cboxSelectGroup->Refresh();
+   char c[2] = {Singleton->defaultSolidGroup, 0};
+	cboxSelectGroup->ItemIndex = cboxSelectGroup->Items->IndexOf(c);
 }
 //---------------------------------------------------------------------------
 void __fastcall TSolidGroupOptionsForm::cbSolidGroupSwitchClick(TObject *Sender)
@@ -37,7 +40,7 @@ void __fastcall TSolidGroupOptionsForm::cbSolidGroupSwitchClick(TObject *Sender)
 //---------------------------------------------------------------------------
 void __fastcall TSolidGroupOptionsForm::cboxSelectGroupChange(TObject *Sender)
 {
-   Singleton->defaultSolidGroup =cboxSelectGroup->Text[0];
+   Singleton->defaultSolidGroup =cboxSelectGroup->Text.c_str()[0];
 	 TIniFile *_ini = new TIniFile(Globals::IniFileName);
 	 AnsiString sect = "Type_" + _ini->ReadString("Default", "TypeSize", "1");
 	 _ini->WriteString(sect, "defaultSolidGroup", Singleton->defaultSolidGroup);

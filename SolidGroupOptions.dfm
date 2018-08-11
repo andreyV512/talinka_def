@@ -34,7 +34,7 @@ object SolidGroupOptionsForm: TSolidGroupOptionsForm
   object cboxSelectGroup: TComboBox
     Left = 8
     Top = 75
-    Width = 145
+    Width = 73
     Height = 21
     TabOrder = 1
     Text = 'K'
