@@ -109,12 +109,15 @@ void Result::ComputeZoneData(bool isLinear)
 void Result::_medianfilter(double* signal, double* result, int N)
 {
 
+	double window[100] = {0};
 	// Move window through all elements of the signal
 	for (int i = 2; i < N - 2; ++i)
 	{
 		// Pick up window elements
-		vector<double>window;
-		window.resize(WidthMedianFilter);
+	  //	vector<double>window;
+	   //	window.resize(WidthMedianFilter);
+	   if(N - i > WidthMedianFilter)
+	   {
 		for (int j = 0; j < WidthMedianFilter; ++j)
 			window[j] = signal[i - 2 + j];
 		// Order elements (only half of them)
@@ -129,6 +132,7 @@ void Result::_medianfilter(double* signal, double* result, int N)
 			const double temp = window[j];
 			window[j] = window[min];
 			window[min] = temp;
+		}
 		}
 		// Get result - the middle element
 		result[i - 2] = window[2];
