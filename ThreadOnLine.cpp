@@ -630,7 +630,7 @@ bool ThreadOnLine::OnlineCycle()
 			TPr::pr(stext2);
 			pr("Задержка по выходу");
 		}
-		if (ToFinish && (!Singleton->solidGroupSwitch || SLD->iSolidGroup->Get()))
+		if (ToFinish)// && (!Singleton->solidGroupSwitch))// || SLD->iSolidGroup->Get()))
 		{
 			if(Singleton->solidGroupSwitch)
 			{

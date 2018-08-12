@@ -32,8 +32,18 @@ CSingleton::CSingleton(TIniFile* _ini, TComponent* _Owner)
 	AnsiString addr = _ini->ReadString("Default", "SortoScopeAddr", "192.168.0.10");
 	AnsiString path = ExtractFilePath(Application->ExeName) + "../../Settings/SortoScopeDLL.dll";
 	solidGroup = new SolidGroup;
-	solidGroup->Init(path.c_str());
-	solidGroup->SetAddr(addr.c_str());
+	if(solidGroup->Init(path.c_str()))
+	{
+		solidGroup->SetAddr(addr.c_str());
+		int c = solidGroup->Get();
+		dprint("test group %c %d", c, c);
+	}
+	else
+	{
+	   dprint("err");
+	   	char *a = "Ошибка загрузки библиотеки группы прочности";
+		TPr::pr(a);
+    }
 }
 
 // ---------------------------------------------------------------------------
