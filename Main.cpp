@@ -550,9 +550,9 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 	AuthorisationForm->ShowModal();
 	delete AuthorisationForm;
 	*/
-	if (ini->ReadBool("Default", "IsAuthorisationOk", false))
+	if (true)//ini->ReadBool("Default", "IsAuthorisationOk", false))
 	{
-		if (true)//SaveToFileDialog->Execute())
+		if (SaveToFileDialog->Execute())
 		{
 			// Создаем пустой файл, чтобы записать в него собранные данные
 			try
