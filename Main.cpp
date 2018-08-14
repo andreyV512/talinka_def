@@ -545,12 +545,14 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 //	delete PasswordForm;
 //	if (ini->ReadBool("Default", "IsPasswordOk", false))
 //	{
+/*
 	TAuthorisationForm* AuthorisationForm = new TAuthorisationForm(this,ini);
 	AuthorisationForm->ShowModal();
 	delete AuthorisationForm;
+	*/
 	if (ini->ReadBool("Default", "IsAuthorisationOk", false))
 	{
-		if (SaveToFileDialog->Execute())
+		if (true)//SaveToFileDialog->Execute())
 		{
 			// Создаем пустой файл, чтобы записать в него собранные данные
 			try
@@ -597,12 +599,14 @@ void __fastcall TMainForm::menuSaveTubeClick(TObject *Sender)
 // ------------------------------------------------------------------------------
 void __fastcall TMainForm::menuLoadTubeClick(TObject *Sender)
 {
+/*
 	TPasswordForm* PasswordForm = new TPasswordForm(this);
 	PasswordForm->SetIni(ini);
 	PasswordForm->SetUserName("Master");
 	PasswordForm->ShowModal();
 	delete PasswordForm;
-	if (ini->ReadBool("Default", "IsPasswordOk", false))
+	*/
+	if (true)//ini->ReadBool("Default", "IsPasswordOk", false))
 	{
 		if (OpenDialogFromFile->Execute())
 		{
