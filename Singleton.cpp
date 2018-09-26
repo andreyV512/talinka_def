@@ -36,7 +36,11 @@ CSingleton::CSingleton(TIniFile* _ini, TComponent* _Owner)
 	{
 		solidGroup->SetAddr(addr.c_str());
 		int c = solidGroup->Get();
-		dprint("test group %c %d", c, c);
+		if(c < 0)
+		{
+			Application->MessageBoxW(L"Нет подключения к устройству группы прочности!",
+				L"Предупреждение!", MB_ICONWARNING);
+		}
 	}
 	else
 	{

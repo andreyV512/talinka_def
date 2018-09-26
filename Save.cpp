@@ -74,7 +74,7 @@ void SaveTubeToDB(TIniFile* _ini)
 	SQL += ",C11Reas,C12Reas,C13Reas,C21Reas,C22Reas,C23Reas,Mod1Brack,Mod2Brack,Mod3Brack";
 	//---
 	SQL += ") values(";
-	SQL += TubeNum;
+	SQL += (int)TubeNum;
 	SQL += ",'";
 	SQL += DateTimeToStr(Date() + Time());
 	SQL += "','";
@@ -83,6 +83,7 @@ void SaveTubeToDB(TIniFile* _ini)
 	SQL += "','";
 	SQL += Singleton->SumResult->decision;
 	SQL += "','";
+	if(0 == Singleton->currentSolidGroup) Singleton->currentSolidGroup = 'K';
 	SQL += (char)Singleton->currentSolidGroup;//"?"; //todo вставить Группу прочности
 	SQL += "',";
 	AnsiString ss;
