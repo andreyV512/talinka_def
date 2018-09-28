@@ -405,6 +405,15 @@ object MainForm: TMainForm
         end
       end
       inherited FRBordersThick: TFRBorders
+        inherited Label6: TLabel
+          Visible = False
+        end
+        inherited Label14: TLabel
+          Visible = False
+        end
+        inherited Label1: TLabel
+          Visible = False
+        end
         inherited EBorder20: TEdit
           Visible = False
         end
