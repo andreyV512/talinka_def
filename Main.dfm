@@ -2,7 +2,7 @@ object MainForm: TMainForm
   Left = -44
   Top = 0
   Caption = #1059#1056#1040#1053'-3000  '#8470'1046. '#1052#1072#1075#1085#1080#1090#1086#1080#1085#1076#1091#1082#1094#1080#1086#1085#1085#1072#1103' '#1076#1077#1092#1077#1082#1090#1086#1089#1082#1086#1087#1080#1103' '#1053#1050#1058
-  ClientHeight = 801
+  ClientHeight = 802
   ClientWidth = 1276
   Color = clBtnFace
   Constraints.MinHeight = 840
@@ -78,7 +78,7 @@ object MainForm: TMainForm
   object StatusBarBottom: TStatusBar
     AlignWithMargins = True
     Left = 3
-    Top = 767
+    Top = 768
     Width = 1270
     Height = 31
     Panels = <
@@ -402,6 +402,14 @@ object MainForm: TMainForm
           Data = {
             0007000000000000000050894000000000004887400000000000A88640000000
             000008864000000000006885400000000000F084400000000000D08140}
+        end
+      end
+      inherited FRBordersThick: TFRBorders
+        inherited EBorder20: TEdit
+          Visible = False
+        end
+        inherited EBorder10: TEdit
+          Visible = False
         end
       end
     end
