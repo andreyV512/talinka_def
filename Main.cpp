@@ -451,6 +451,7 @@ void __fastcall TMainForm::bViewClick(TObject *Sender)
 // -----------------------------------------------------------------------------
 void __fastcall TMainForm::bWorkClick(TObject *Sender)
 {
+#if 1
 	if (workonline == NULL)
 	{
 		//Вот здесь нужно вызвать окно запроса оператора.
@@ -471,13 +472,15 @@ void __fastcall TMainForm::bWorkClick(TObject *Sender)
 	}
 	else
 		ReStart();
-
+#else
+	SaveTubeToDB(ini);
+#endif
 }
 
 // ---------------------------------------------------------------------------
 void __fastcall TMainForm::bCancelWorkClick(TObject *Sender)
 {
-	Stop();
+   	Stop();
 }
 
 // ---------------------------------------------------------------------------

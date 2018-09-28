@@ -91,7 +91,7 @@
 			<ILINK_TranslatedLibraryPath>$(BDSLIB)\$(PLATFORM)\debug\$(LANGDIR);$(ILINK_TranslatedLibraryPath)</ILINK_TranslatedLibraryPath>
 		</PropertyGroup>
 		<PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-			<Defines>__NO1730;__NOL502;$(Defines)</Defines>
+			<Defines>NO1730;NOL502;$(Defines)</Defines>
 			<BCC_wpar>false</BCC_wpar>
 			<BCC_wiip>false</BCC_wiip>
 			<IncludePath>DSPFilters\include;$(IncludePath)</IncludePath>
@@ -544,7 +544,6 @@
 			<FormResources Include="uFViewZoneS.dfm"/>
 			<FormResources Include="uFRStatist.dfm"/>
 			<FormResources Include="uFRViewZone.dfm"/>
-			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="ColorSettings.dfm"/>
 			<FormResources Include="ChangePassword.dfm"/>
 			<FormResources Include="Authorisation.dfm"/>
@@ -553,6 +552,7 @@
 			<FormResources Include="ABOUT_NTC_NK_URAN.dfm"/>
 			<FormResources Include="A1730\uFRSigPanel.dfm"/>
 			<FormResources Include="Main.dfm"/>
+			<FormResources Include="Manage.dfm"/>
 			<FormResources Include="EtalonTubeDefectsNew.dfm"/>
 			<FormResources Include="Defectoscopers.dfm"/>
 			<FormResources Include="EtalonBorderSet.dfm"/>

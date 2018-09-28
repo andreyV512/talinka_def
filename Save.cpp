@@ -74,7 +74,7 @@ void SaveTubeToDB(TIniFile* _ini)
 	SQL += ",C11Reas,C12Reas,C13Reas,C21Reas,C22Reas,C23Reas,Mod1Brack,Mod2Brack,Mod3Brack";
 	//---
 	SQL += ") values(";
-	SQL += (int)TubeNum;
+	SQL += IntToStr(TubeNum);
 	SQL += ",'";
 	SQL += DateTimeToStr(Date() + Time());
 	SQL += "','";
@@ -93,11 +93,11 @@ void SaveTubeToDB(TIniFile* _ini)
 		minThick = 10.00;
 	ss.printf("%0.2f,", minThick);
 	SQL += ss;
-	SQL += Singleton->SumResult->zones;
+	SQL += IntToStr(Singleton->SumResult->zones);
 	SQL += ",";
-	SQL += Singleton->SumResult->cut1;
+	SQL += IntToStr(Singleton->SumResult->cut1);
 	SQL += ",";
-	SQL += Singleton->SumResult->cut2;
+	SQL += IntToStr(Singleton->SumResult->cut2);
 	SQL += ",'";
 	SQL += ini->ReadString("Default", "LastAuthorisation", "?");
 	//---

@@ -634,9 +634,23 @@ bool ThreadOnLine::OnlineCycle()
 		{
 			if(Singleton->solidGroupSwitch)
 			{
-				Singleton->currentSolidGroup = Singleton->solidGroup->Get();
-				if(Singleton->currentSolidGroup < 0) Singleton->currentSolidGroup = Singleton->defaultSolidGroup;
+				while(true)
+				{
+					Singleton->currentSolidGroup = Singleton->solidGroup->Get();
+					if(Singleton->currentSolidGroup < 0)
+					{
+						if(IDCANCEL == Application->MessageBoxW(L"Нет связи с модулем группы прочности", L"Предупреждение!", MB_ICONWARNING | MB_OKCANCEL))
+						{
+							Singleton->currentSolidGroup = Singleton->defaultSolidGroup;
+							break;
+						}
+					}
+				}
 			}
+			else
+			{
+				 Singleton->currentSolidGroup = Singleton->defaultSolidGroup;
+            }
 			if (GetTickCount() - FinishTick > 2000)
 			{
 					   SLD->oCSOLPOW->Set(false);
